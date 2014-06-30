@@ -1,0 +1,7 @@
+  [1m[36m (136.0ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "countryCode" text, "phone" text, "code" text, "created_at" datetime, "updated_at" datetime, "email" varchar(255)) [0m
+  [1m[35m (147.0ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (49.0ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.0ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (74.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140526085605')[0m
+  [1m[35m (66.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140309171948')
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m

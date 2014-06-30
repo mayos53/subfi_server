@@ -1,0 +1,14 @@
+<h1>Add User To Group</h1>
+<%= form_for :group_post, url: save_user_groups_path do |f| %>
+ <p>
+   Group
+   <%= f.select :group_id, options_for_select(Group.all.map {|p| [p.name,p.id]}) %>
+ </p>
+ <p>
+ 	User
+   <%= f.select :user_id, options_for_select(User.all.map {|p| [p.name,p.id]}) %>
+ </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

@@ -1,0 +1,13 @@
+<h1>New Group</h1>
+<%= form_for :group, url: groups_path do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+ <p>
+   <%= f.select :user_id, options_for_select(User.all.map {|p| [p.name,p.id]}) %>
+ </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

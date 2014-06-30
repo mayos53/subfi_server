@@ -1,0 +1,25 @@
+
+<p>
+    <%= image_tag @group_result[:wallpaper].photo.url(:medium) %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @group_result[:name] %>
+</p>
+
+<p>
+  <strong>Group Users:</strong>
+  <% @group_result[:users].each do |user| %>
+    <li>
+        <%= link_to user[:user].name, user[:user] %> 
+        <% if user[:administrator] %> A <% end %>
+        
+
+    </li>
+<% end %>
+
+
+</p>
+
+<%= button_to "Add User", add_user_groups_path, :method => "get" 	 %>

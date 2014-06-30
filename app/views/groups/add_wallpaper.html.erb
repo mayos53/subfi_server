@@ -1,0 +1,12 @@
+<h1>New Wallpaper</h1>
+<%= form_for @wallpaper,:html => { :multipart => true }, url: save_wallpaper_groups_path do |f| %>
+  <p>
+ 	   <%= f.file_field :photo %>
+  </p>
+ <p>
+   <%= f.select :group_id, options_for_select(Group.all.map {|p| [p.name,p.id]}) %>
+ </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
