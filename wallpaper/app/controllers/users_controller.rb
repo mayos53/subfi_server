@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 
       respond_to do |format|
         format.html
-        format.json { { render :json => {:registrationId => @user.registratio_id, :status => 1 ,:message => "OK"}}  }
+        format.json {  render :json => {:registrationId => @user.registratio_id, :status => 1 ,:message => "OK"}}  
     end
   end
  
