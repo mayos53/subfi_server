@@ -32,6 +32,17 @@ class UsersController < ApplicationController
     end
   end
 
+
+  def register
+      @user = User.find(register_params[:id])
+      @user.registratio_id = register_params[:registrationId]
+      @user.save
+
+      respond_to do |format|
+        format.html
+        format.json { { render :json => {:registrationId => @user.registratio_id, :status => 1 ,:message => "OK"}}  }
+    end
+  end
  
   	
 
@@ -39,5 +50,9 @@ private
   def user_params
     params.require(:user).permit(:name,:email, :phone, :countryCode)
   end
+
+  def register_params
+    params.require(:user).permit(:id,:registrationId)
+  end  
 
 end
