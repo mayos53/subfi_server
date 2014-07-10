@@ -35,4 +35,5 @@ Blog::Application.configure do
   config.active_support.deprecation = :stderr
 
   Paperclip.options[:command_path] = "/usr/local/bin"
+ 
 end

@@ -29148,3 +29148,713 @@ Processing by UsersController#show as HTML
   [1m[36mUser Load (0.0ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", "23"]]
   Rendered users/show.html.erb within layouts/application (0.0ms)
 Completed 200 OK in 23ms (Views: 20.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/groups" for 127.0.0.1 at 2014-07-10 12:11:25 +0300
+Processing by GroupsController#index as HTML
+  [1m[35mGroup Load (0.5ms)[0m  SELECT "groups".* FROM "groups"
+  Rendered groups/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 40ms (Views: 19.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-07-10 12:11:25 +0300
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-07-10 12:11:25 +0300
+
+
+Started GET "/assets/posts.css?body=1" for 127.0.0.1 at 2014-07-10 12:11:25 +0300
+
+
+Started GET "/assets/groups.css?body=1" for 127.0.0.1 at 2014-07-10 12:11:26 +0300
+
+
+Started GET "/assets/welcome.css?body=1" for 127.0.0.1 at 2014-07-10 12:11:26 +0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-07-10 12:11:26 +0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-07-10 12:11:26 +0300
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-07-10 12:11:26 +0300
+
+
+Started GET "/assets/groups.js?body=1" for 127.0.0.1 at 2014-07-10 12:11:26 +0300
+
+
+Started GET "/assets/posts.js?body=1" for 127.0.0.1 at 2014-07-10 12:11:26 +0300
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-07-10 12:11:26 +0300
+
+
+Started GET "/assets/welcome.js?body=1" for 127.0.0.1 at 2014-07-10 12:11:26 +0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-07-10 12:11:26 +0300
+
+
+Started GET "/groups/18" for 127.0.0.1 at 2014-07-10 12:11:31 +0300
+Processing by GroupsController#show as HTML
+  Parameters: {"id"=>"18"}
+  [1m[36mGroup Load (1.0ms)[0m  [1mSELECT "groups".* FROM "groups" WHERE "groups"."id" = ? LIMIT 1[0m  [["id", "18"]]
+  [1m[35mMembership Load (0.5ms)[0m  SELECT "memberships".* FROM "memberships" WHERE "memberships"."group_id" IN (18)
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" IN (23, 24)[0m
+  [1m[35mUser Load (0.0ms)[0m  SELECT "users".* FROM "users" INNER JOIN "memberships" ON "users"."id" = "memberships"."user_id" WHERE "memberships"."group_id" = ?  [["group_id", 18]]
+  Rendered groups/show.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 26ms (Views: 18.0ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/users/23" for 127.0.0.1 at 2014-07-10 12:12:13 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"23"}
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", "23"]]
+  Rendered users/show.html.erb within layouts/application (18.0ms)
+Completed 200 OK in 39ms (Views: 37.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-07-10 12:12:14 +0300
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-07-10 12:12:14 +0300
+
+
+Started GET "/assets/posts.css?body=1" for 127.0.0.1 at 2014-07-10 12:12:14 +0300
+
+
+Started GET "/assets/groups.css?body=1" for 127.0.0.1 at 2014-07-10 12:12:14 +0300
+
+
+Started GET "/assets/welcome.css?body=1" for 127.0.0.1 at 2014-07-10 12:12:14 +0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-07-10 12:12:14 +0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-07-10 12:12:14 +0300
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-07-10 12:12:14 +0300
+
+
+Started GET "/assets/groups.js?body=1" for 127.0.0.1 at 2014-07-10 12:12:14 +0300
+
+
+Started GET "/assets/posts.js?body=1" for 127.0.0.1 at 2014-07-10 12:12:14 +0300
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-07-10 12:12:14 +0300
+
+
+Started GET "/assets/welcome.js?body=1" for 127.0.0.1 at 2014-07-10 12:12:14 +0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-07-10 12:12:14 +0300
+
+
+Started GET "/groups/18" for 127.0.0.1 at 2014-07-10 12:12:15 +0300
+Processing by GroupsController#show as HTML
+  Parameters: {"id"=>"18"}
+  [1m[35mGroup Load (0.5ms)[0m  SELECT "groups".* FROM "groups" WHERE "groups"."id" = ? LIMIT 1  [["id", "18"]]
+  [1m[36mMembership Load (0.5ms)[0m  [1mSELECT "memberships".* FROM "memberships" WHERE "memberships"."group_id" IN (18)[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" IN (23, 24)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "memberships" ON "users"."id" = "memberships"."user_id" WHERE "memberships"."group_id" = ?[0m  [["group_id", 18]]
+  Rendered groups/show.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 30ms (Views: 18.5ms | ActiveRecord: 2.0ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddRegistratioIdToUsers (20140710120001)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (13.0ms)[0m  [1mALTER TABLE "users" ADD "registrationId" varchar(255)[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140710120001"]]
+  [1m[36m (69.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+
+
+Started GET "/users/register.json" for 127.0.0.1 at 2014-07-10 15:27:03 +0300
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+
+SyntaxError (C:/Wallpaper app/Wallpaper server/wallpaper/app/controllers/users_controller.rb:43: syntax error, unexpected tSYMBEG, expecting keyword_do or '{' or '('
+...       format.json { { render :json => {:registrationId => @...
+...                               ^
+C:/Wallpaper app/Wallpaper server/wallpaper/app/controllers/users_controller.rb:43: syntax error, unexpected '}', expecting keyword_end
+C:/Wallpaper app/Wallpaper server/wallpaper/app/controllers/users_controller.rb:58: syntax error, unexpected $end, expecting keyword_end):
+  activesupport (4.0.2) lib/active_support/dependencies.rb:424:in `load'
+  activesupport (4.0.2) lib/active_support/dependencies.rb:424:in `block in load_file'
+  activesupport (4.0.2) lib/active_support/dependencies.rb:616:in `new_constants_in'
+  activesupport (4.0.2) lib/active_support/dependencies.rb:423:in `load_file'
+  activesupport (4.0.2) lib/active_support/dependencies.rb:324:in `require_or_load'
+  activesupport (4.0.2) lib/active_support/dependencies.rb:463:in `load_missing_constant'
+  activesupport (4.0.2) lib/active_support/dependencies.rb:184:in `const_missing'
+  activesupport (4.0.2) lib/active_support/inflector/methods.rb:226:in `const_get'
+  activesupport (4.0.2) lib/active_support/inflector/methods.rb:226:in `block in constantize'
+  activesupport (4.0.2) lib/active_support/inflector/methods.rb:224:in `each'
+  activesupport (4.0.2) lib/active_support/inflector/methods.rb:224:in `inject'
+  activesupport (4.0.2) lib/active_support/inflector/methods.rb:224:in `constantize'
+  activesupport (4.0.2) lib/active_support/dependencies.rb:535:in `get'
+  activesupport (4.0.2) lib/active_support/dependencies.rb:566:in `constantize'
+  actionpack (4.0.2) lib/action_dispatch/routing/route_set.rb:76:in `controller_reference'
+  actionpack (4.0.2) lib/action_dispatch/routing/route_set.rb:66:in `controller'
+  actionpack (4.0.2) lib/action_dispatch/routing/route_set.rb:44:in `call'
+  actionpack (4.0.2) lib/action_dispatch/journey/router.rb:71:in `block in call'
+  actionpack (4.0.2) lib/action_dispatch/journey/router.rb:59:in `each'
+  actionpack (4.0.2) lib/action_dispatch/journey/router.rb:59:in `call'
+  actionpack (4.0.2) lib/action_dispatch/routing/route_set.rb:680:in `call'
+  rack (1.5.2) lib/rack/etag.rb:23:in `call'
+  rack (1.5.2) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.5.2) lib/rack/head.rb:11:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/flash.rb:241:in `call'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/cookies.rb:486:in `call'
+  activerecord (4.0.2) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:626:in `call'
+  activerecord (4.0.2) lib/active_record/migration.rb:369:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.0.2) lib/active_support/callbacks.rb:373:in `_run__539088103__call__callbacks'
+  activesupport (4.0.2) lib/active_support/callbacks.rb:80:in `run_callbacks'
+  actionpack (4.0.2) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/reloader.rb:64:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.2) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.2) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.2) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.2) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.2) lib/rails/engine.rb:511:in `call'
+  railties (4.0.2) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  D:/RailsInstaller/Ruby1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  D:/RailsInstaller/Ruby1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  D:/RailsInstaller/Ruby1.9.3/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (20.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (76.0ms)
+
+
+Started GET "/users/register.json" for 127.0.0.1 at 2014-07-10 15:27:31 +0300
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"register"}
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", "register"]]
+Completed 404 Not Found in 53ms
+
+ActiveRecord::RecordNotFound (Couldn't find User with id=register):
+  app/controllers/users_controller.rb:19:in `show'
+
+
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (6.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (26.0ms)
+
+
+Started POST "/users/register" for 127.0.0.1 at 2014-07-10 15:28:01 +0300
+Processing by UsersController#register as */*
+Can't verify CSRF token authenticity
+Completed 400 Bad Request in 2ms
+
+ActionController::ParameterMissing (param not found: user):
+  app/controllers/users_controller.rb:55:in `register_params'
+  app/controllers/users_controller.rb:37:in `register'
+
+
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (20.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (47.0ms)
+
+
+Started POST "/users/register" for 127.0.0.1 at 2014-07-10 15:28:27 +0300
+Processing by UsersController#register as */*
+Can't verify CSRF token authenticity
+Completed 400 Bad Request in 8ms
+
+ActionController::ParameterMissing (param not found: user):
+  app/controllers/users_controller.rb:55:in `register_params'
+  app/controllers/users_controller.rb:37:in `register'
+
+
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (33.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2014-07-10 15:28:50 +0300
+Processing by UsersController#create as */*
+Can't verify CSRF token authenticity
+Completed 400 Bad Request in 1ms
+
+ActionController::ParameterMissing (param not found: user):
+  app/controllers/users_controller.rb:51:in `user_params'
+  app/controllers/users_controller.rb:9:in `create'
+
+
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (25.0ms)
+
+
+Started POST "/users/register.json" for 127.0.0.1 at 2014-07-10 15:29:52 +0300
+Processing by UsersController#register as JSON
+Can't verify CSRF token authenticity
+Completed 400 Bad Request in 8ms
+
+ActionController::ParameterMissing (param not found: user):
+  app/controllers/users_controller.rb:55:in `register_params'
+  app/controllers/users_controller.rb:37:in `register'
+
+
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (30.0ms)
+
+
+Started POST "/users/register.json" for 127.0.0.1 at 2014-07-10 15:29:58 +0300
+Processing by UsersController#register as JSON
+Can't verify CSRF token authenticity
+Completed 400 Bad Request in 4ms
+
+ActionController::ParameterMissing (param not found: user):
+  app/controllers/users_controller.rb:55:in `register_params'
+  app/controllers/users_controller.rb:37:in `register'
+
+
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (30.0ms)
+
+
+Started GET "/users/register.json" for 127.0.0.1 at 2014-07-10 15:33:12 +0300
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"register"}
+  [1m[35mUser Load (1.0ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "register"]]
+Completed 404 Not Found in 1ms
+
+ActiveRecord::RecordNotFound (Couldn't find User with id=register):
+  app/controllers/users_controller.rb:19:in `show'
+
+
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (21.0ms)
+
+
+Started GET "/users/register.json" for 127.0.0.1 at 2014-07-10 15:42:32 +0300
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"register"}
+  [1m[36mUser Load (1.0ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", "register"]]
+Completed 404 Not Found in 2ms
+
+ActiveRecord::RecordNotFound (Couldn't find User with id=register):
+  app/controllers/users_controller.rb:19:in `show'
+
+
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (40.0ms)
+
+
+Started GET "/users/register.json" for 127.0.0.1 at 2014-07-10 15:42:34 +0300
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"register"}
+  [1m[35mUser Load (0.0ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "register"]]
+Completed 404 Not Found in 2ms
+
+ActiveRecord::RecordNotFound (Couldn't find User with id=register):
+  app/controllers/users_controller.rb:19:in `show'
+
+
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (21.0ms)
+
+
+Started POST "/users/register" for 127.0.0.1 at 2014-07-10 15:43:08 +0300
+Processing by UsersController#register as */*
+Can't verify CSRF token authenticity
+Completed 400 Bad Request in 1ms
+
+ActionController::ParameterMissing (param not found: user):
+  app/controllers/users_controller.rb:55:in `register_params'
+  app/controllers/users_controller.rb:37:in `register'
+
+
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (27.0ms)
+
+
+Started POST "/users/register.json" for 127.0.0.1 at 2014-07-10 15:43:13 +0300
+Processing by UsersController#register as JSON
+Can't verify CSRF token authenticity
+Completed 400 Bad Request in 1ms
+
+ActionController::ParameterMissing (param not found: user):
+  app/controllers/users_controller.rb:55:in `register_params'
+  app/controllers/users_controller.rb:37:in `register'
+
+
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (28.0ms)
+
+
+Started POST "/users/register.json" for 127.0.0.1 at 2014-07-10 15:44:26 +0300
+Processing by UsersController#register as JSON
+Can't verify CSRF token authenticity
+Completed 400 Bad Request in 1ms
+
+ActionController::ParameterMissing (param not found: user):
+  app/controllers/users_controller.rb:55:in `register_params'
+  app/controllers/users_controller.rb:37:in `register'
+
+
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (23.0ms)
+
+
+Started POST "/users/register.json" for 127.0.0.1 at 2014-07-10 15:46:32 +0300
+Processing by UsersController#register as JSON
+Can't verify CSRF token authenticity
+Completed 400 Bad Request in 8ms
+
+ActionController::ParameterMissing (param not found: register):
+  app/controllers/users_controller.rb:55:in `register_params'
+  app/controllers/users_controller.rb:37:in `register'
+
+
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (44.0ms)
+
+
+Started POST "/users.json" for 127.0.0.1 at 2014-07-10 15:47:27 +0300
+Processing by UsersController#create as JSON
+  Parameters: {"name"=>"yossi", "email"=>"email", "user"=>{"name"=>"yossi", "email"=>"email"}}
+Can't verify CSRF token authenticity
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "users" ("email", "name") VALUES (?, ?)  [["email", "email"], ["name", "yossi"]]
+  [1m[36m (141.0ms)[0m  [1mcommit transaction[0m
+Completed 200 OK in 156ms (Views: 1.0ms | ActiveRecord: 144.0ms)
+
+
+Started POST "/users/register.json" for 127.0.0.1 at 2014-07-10 15:54:33 +0300
+Processing by UsersController#register as JSON
+  Parameters: {"registrationId"=>"APA91bEkPaZ-9OgCsyiarZzWygfaBr-sjpTigILRsQZq1b3T-QmNxK1TwoWGxNCOoPsc1l0qECkaJQ-4hZ7sf2JGOUKJWSh2t9uB4Kg5CtzbvkOfkVzJqN0Nqb1sktgIJlQfDL6qw0ojIBuoRtnuBBa1bDHwqhXX49JFo8vJl2opwBUD7WgjVvg", "id"=>"2", "user"=>{"id"=>"2", "registrationId"=>"APA91bEkPaZ-9OgCsyiarZzWygfaBr-sjpTigILRsQZq1b3T-QmNxK1TwoWGxNCOoPsc1l0qECkaJQ-4hZ7sf2JGOUKJWSh2t9uB4Kg5CtzbvkOfkVzJqN0Nqb1sktgIJlQfDL6qw0ojIBuoRtnuBBa1bDHwqhXX49JFo8vJl2opwBUD7WgjVvg"}}
+Can't verify CSRF token authenticity
+  [1m[35mUser Load (1.0ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "2"]]
+Completed 404 Not Found in 30ms
+
+ActiveRecord::RecordNotFound (Couldn't find User with id=2):
+  app/controllers/users_controller.rb:37:in `register'
+
+
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (26.0ms)
+
+
+Started POST "/users/register.json" for 127.0.0.1 at 2014-07-10 15:56:48 +0300
+Processing by UsersController#register as JSON
+  Parameters: {"registrationId"=>"APA91bEkPaZ-9OgCsyiarZzWygfaBr-sjpTigILRsQZq1b3T-QmNxK1TwoWGxNCOoPsc1l0qECkaJQ-4hZ7sf2JGOUKJWSh2t9uB4Kg5CtzbvkOfkVzJqN0Nqb1sktgIJlQfDL6qw0ojIBuoRtnuBBa1bDHwqhXX49JFo8vJl2opwBUD7WgjVvg", "id"=>"23", "user"=>{"id"=>"23", "registrationId"=>"APA91bEkPaZ-9OgCsyiarZzWygfaBr-sjpTigILRsQZq1b3T-QmNxK1TwoWGxNCOoPsc1l0qECkaJQ-4hZ7sf2JGOUKJWSh2t9uB4Kg5CtzbvkOfkVzJqN0Nqb1sktgIJlQfDL6qw0ojIBuoRtnuBBa1bDHwqhXX49JFo8vJl2opwBUD7WgjVvg"}}
+Can't verify CSRF token authenticity
+  [1m[36mUser Load (1.0ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", "23"]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (1.0ms)[0m  [1mUPDATE "users" SET "registrationId" = ? WHERE "users"."id" = 23[0m  [["registrationId", "APA91bEkPaZ-9OgCsyiarZzWygfaBr-sjpTigILRsQZq1b3T-QmNxK1TwoWGxNCOoPsc1l0qECkaJQ-4hZ7sf2JGOUKJWSh2t9uB4Kg5CtzbvkOfkVzJqN0Nqb1sktgIJlQfDL6qw0ojIBuoRtnuBBa1bDHwqhXX49JFo8vJl2opwBUD7WgjVvg"]]
+  [1m[35m (56.0ms)[0m  commit transaction
+Completed 500 Internal Server Error in 163ms
+
+NoMethodError (undefined method `registratio_id' for #<User:0x3c1cdb8>):
+  app/controllers/users_controller.rb:43:in `block (2 levels) in register'
+  app/controllers/users_controller.rb:41:in `register'
+
+
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (25.0ms)
+
+
+Started POST "/users/register.json" for 127.0.0.1 at 2014-07-10 15:57:35 +0300
+Processing by UsersController#register as JSON
+  Parameters: {"registrationId"=>"APA91bEkPaZ-9OgCsyiarZzWygfaBr-sjpTigILRsQZq1b3T-QmNxK1TwoWGxNCOoPsc1l0qECkaJQ-4hZ7sf2JGOUKJWSh2t9uB4Kg5CtzbvkOfkVzJqN0Nqb1sktgIJlQfDL6qw0ojIBuoRtnuBBa1bDHwqhXX49JFo8vJl2opwBUD7WgjVvg", "id"=>"23", "user"=>{"id"=>"23", "registrationId"=>"APA91bEkPaZ-9OgCsyiarZzWygfaBr-sjpTigILRsQZq1b3T-QmNxK1TwoWGxNCOoPsc1l0qECkaJQ-4hZ7sf2JGOUKJWSh2t9uB4Kg5CtzbvkOfkVzJqN0Nqb1sktgIJlQfDL6qw0ojIBuoRtnuBBa1bDHwqhXX49JFo8vJl2opwBUD7WgjVvg"}}
+Can't verify CSRF token authenticity
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", "23"]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+Completed 500 Internal Server Error in 18ms
+
+NoMethodError (undefined method `registratio_id' for #<User:0x33bf2c8>):
+  app/controllers/users_controller.rb:43:in `block (2 levels) in register'
+  app/controllers/users_controller.rb:41:in `register'
+
+
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (15.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (42.0ms)
+
+
+Started POST "/users/register.json" for 127.0.0.1 at 2014-07-10 15:58:36 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#register as JSON
+  Parameters: {"registrationId"=>"APA91bEkPaZ-9OgCsyiarZzWygfaBr-sjpTigILRsQZq1b3T-QmNxK1TwoWGxNCOoPsc1l0qECkaJQ-4hZ7sf2JGOUKJWSh2t9uB4Kg5CtzbvkOfkVzJqN0Nqb1sktgIJlQfDL6qw0ojIBuoRtnuBBa1bDHwqhXX49JFo8vJl2opwBUD7WgjVvg", "id"=>"23", "user"=>{"id"=>"23", "registrationId"=>"APA91bEkPaZ-9OgCsyiarZzWygfaBr-sjpTigILRsQZq1b3T-QmNxK1TwoWGxNCOoPsc1l0qECkaJQ-4hZ7sf2JGOUKJWSh2t9uB4Kg5CtzbvkOfkVzJqN0Nqb1sktgIJlQfDL6qw0ojIBuoRtnuBBa1bDHwqhXX49JFo8vJl2opwBUD7WgjVvg"}}
+Can't verify CSRF token authenticity
+  [1m[35mUser Load (1.0ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "23"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+Completed 500 Internal Server Error in 60ms
+
+NoMethodError (undefined method `registratio_id' for #<User:0x5244090>):
+  app/controllers/users_controller.rb:43:in `block (2 levels) in register'
+  app/controllers/users_controller.rb:41:in `register'
+
+
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (39.0ms)
+
+
+Started POST "/users/register.json" for 127.0.0.1 at 2014-07-10 15:59:02 +0300
+Processing by UsersController#register as JSON
+  Parameters: {"registrationId"=>"APA91bEkPaZ-9OgCsyiarZzWygfaBr-sjpTigILRsQZq1b3T-QmNxK1TwoWGxNCOoPsc1l0qECkaJQ-4hZ7sf2JGOUKJWSh2t9uB4Kg5CtzbvkOfkVzJqN0Nqb1sktgIJlQfDL6qw0ojIBuoRtnuBBa1bDHwqhXX49JFo8vJl2opwBUD7WgjVvg", "id"=>"23", "user"=>{"id"=>"23", "registrationId"=>"APA91bEkPaZ-9OgCsyiarZzWygfaBr-sjpTigILRsQZq1b3T-QmNxK1TwoWGxNCOoPsc1l0qECkaJQ-4hZ7sf2JGOUKJWSh2t9uB4Kg5CtzbvkOfkVzJqN0Nqb1sktgIJlQfDL6qw0ojIBuoRtnuBBa1bDHwqhXX49JFo8vJl2opwBUD7WgjVvg"}}
+Can't verify CSRF token authenticity
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", "23"]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+Completed 200 OK in 23ms (Views: 1.0ms | ActiveRecord: 2.0ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreatePush (20140710144842)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "push_configurations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "type" varchar(255) NOT NULL, "app" varchar(255) NOT NULL, "properties" text, "enabled" boolean DEFAULT 'f' NOT NULL, "connections" integer DEFAULT 1 NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  CREATE TABLE "push_messages" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "app" varchar(255) NOT NULL, "device" varchar(255) NOT NULL, "type" varchar(255) NOT NULL, "properties" text, "delivered" boolean DEFAULT 'f' NOT NULL, "delivered_at" datetime, "failed" boolean DEFAULT 'f' NOT NULL, "failed_at" datetime, "error_code" integer, "error_description" varchar(255), "deliver_after" datetime, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mCREATE INDEX "index_push_messages_on_delivered_and_failed_and_deliver_after" ON "push_messages" ("delivered", "failed", "deliver_after")[0m
+  [1m[35m (0.0ms)[0m  CREATE TABLE "push_feedback" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "app" varchar(255) NOT NULL, "device" varchar(255) NOT NULL, "type" varchar(255) NOT NULL, "follow_up" varchar(255) NOT NULL, "failed_at" datetime NOT NULL, "processed" boolean DEFAULT 'f' NOT NULL, "processed_at" datetime, "properties" text, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mCREATE INDEX "index_push_feedback_on_processed" ON "push_feedback" ("processed")[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140710144842"]]
+  [1m[36m (82.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (1.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mPush::Configuration Exists (0.0ms)[0m  SELECT 1 AS one FROM "push_configurations" WHERE ("push_configurations"."type" = 'Push::ConfigurationGcm' AND "push_configurations"."app" = 'Wallpaper') LIMIT 1
+  [1m[36mSQL (48.0ms)[0m  [1mINSERT INTO "push_configurations" ("app", "connections", "created_at", "enabled", "properties", "type", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["app", "Wallpaper"], ["connections", 2], ["created_at", Thu, 10 Jul 2014 14:56:34 UTC +00:00], ["enabled", true], ["properties", "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nkey: APA91bEkPaZ-9OgCsyiarZzWygfaBr-sjpTigILRsQZq1b3T-QmNxK1TwoWGxNCOoPsc1l0qECkaJQ-4hZ7sf2JGOUKJWSh2t9uB4Kg5CtzbvkOfkVzJqN0Nqb1sktgIJlQfDL6qw0ojIBuoRtnuBBa1bDHwqhXX49JFo8vJl2opwBUD7WgjVvg\n"], ["type", "Push::ConfigurationGcm"], ["updated_at", Thu, 10 Jul 2014 14:56:34 UTC +00:00]]
+  [1m[35m (79.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mPush::Configuration Exists (1.0ms)[0m  SELECT 1 AS one FROM "push_configurations" WHERE ("push_configurations"."type" = 'Push::ConfigurationGcm' AND "push_configurations"."app" = 'Wallpaper') LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mPush::Configuration Exists (0.0ms)[0m  SELECT 1 AS one FROM "push_configurations" WHERE ("push_configurations"."type" = 'Push::ConfigurationGcm' AND "push_configurations"."app" = 'Wallpaper') LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mPush::Configuration Exists (1.0ms)[0m  SELECT 1 AS one FROM "push_configurations" WHERE ("push_configurations"."type" = 'Push::ConfigurationGcm' AND "push_configurations"."app" = 'Wallpaper') LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (9.0ms)[0m  [1mINSERT INTO "push_messages" ("app", "created_at", "device", "properties", "type", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["app", "app_name"], ["created_at", Thu, 10 Jul 2014 14:59:27 UTC +00:00], ["device", "<GCM registration_id here>"], ["properties", "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\ncollapse_key: MSG\npayload: !ruby/hash:ActiveSupport::HashWithIndifferentAccess\n  message: Hello World\n"], ["type", "Push::MessageGcm"], ["updated_at", Thu, 10 Jul 2014 14:59:27 UTC +00:00]]
+  [1m[35m (75.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "push_messages" ("app", "created_at", "device", "properties", "type", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["app", "Wallpaper"], ["created_at", Thu, 10 Jul 2014 14:59:37 UTC +00:00], ["device", "APA91bEkPaZ-9OgCsyiarZzWygfaBr-sjpTigILRsQZq1b3T-QmNxK1TwoWGxNCOoPsc1l0qECkaJQ-4hZ7sf2JGOUKJWSh2t9uB4Kg5CtzbvkOfkVzJqN0Nqb1sktgIJlQfDL6qw0ojIBuoRtnuBBa1bDHwqhXX49JFo8vJl2opwBUD7WgjVvg\n"], ["properties", "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\ncollapse_key: MSG\npayload: !ruby/hash:ActiveSupport::HashWithIndifferentAccess\n  message: Hello World\n"], ["type", "Push::MessageGcm"], ["updated_at", Thu, 10 Jul 2014 14:59:37 UTC +00:00]]
+  [1m[36m (98.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "push_messages" ("app", "created_at", "device", "properties", "type", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["app", "Wallpaper"], ["created_at", Thu, 10 Jul 2014 15:02:31 UTC +00:00], ["device", "APA91bEkPaZ-9OgCsyiarZzWygfaBr-sjpTigILRsQZq1b3T-QmNxK1TwoWGxNCOoPsc1l0qECkaJQ-4hZ7sf2JGOUKJWSh2t9uB4Kg5CtzbvkOfkVzJqN0Nqb1sktgIJlQfDL6qw0ojIBuoRtnuBBa1bDHwqhXX49JFo8vJl2opwBUD7WgjVvg\n"], ["properties", "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\ncollapse_key: MSG\npayload: !ruby/hash:ActiveSupport::HashWithIndifferentAccess\n  message: Hello World\n"], ["type", "Push::MessageGcm"], ["updated_at", Thu, 10 Jul 2014 15:02:31 UTC +00:00]]
+  [1m[35m (78.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "push_messages" ("app", "created_at", "device", "properties", "type", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["app", "Wallpaper"], ["created_at", Thu, 10 Jul 2014 15:05:05 UTC +00:00], ["device", "APA91bEkPaZ-9OgCsyiarZzWygfaBr-sjpTigILRsQZq1b3T-QmNxK1TwoWGxNCOoPsc1l0qECkaJQ-4hZ7sf2JGOUKJWSh2t9uB4Kg5CtzbvkOfkVzJqN0Nqb1sktgIJlQfDL6qw0ojIBuoRtnuBBa1bDHwqhXX49JFo8vJl2opwBUD7WgjVvg\n"], ["properties", "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\ncollapse_key: MSG\npayload: !ruby/hash:ActiveSupport::HashWithIndifferentAccess\n  message: Hello World\n"], ["type", "Push::MessageGcm"], ["updated_at", Thu, 10 Jul 2014 15:05:05 UTC +00:00]]
+  [1m[36m (94.0ms)[0m  [1mcommit transaction[0m
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mPush::Configuration Exists (0.0ms)[0m  SELECT 1 AS one FROM "push_configurations" WHERE ("push_configurations"."type" = 'Push::ConfigurationGcm' AND "push_configurations"."app" = 'Wallpaper') LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36mSQL (12.0ms)[0m  [1mINSERT INTO "push_messages" ("app", "created_at", "device", "properties", "type", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["app", "Wallpaper"], ["created_at", Thu, 10 Jul 2014 15:12:48 UTC +00:00], ["device", "APA91bEkPaZ-9OgCsyiarZzWygfaBr-sjpTigILRsQZq1b3T-QmNxK1TwoWGxNCOoPsc1l0qECkaJQ-4hZ7sf2JGOUKJWSh2t9uB4Kg5CtzbvkOfkVzJqN0Nqb1sktgIJlQfDL6qw0ojIBuoRtnuBBa1bDHwqhXX49JFo8vJl2opwBUD7WgjVvg\n"], ["properties", "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\ncollapse_key: MSG\npayload: !ruby/hash:ActiveSupport::HashWithIndifferentAccess\n  message: Hello World\n"], ["type", "Push::MessageGcm"], ["updated_at", Thu, 10 Jul 2014 15:12:48 UTC +00:00]]
+  [1m[35m (92.0ms)[0m  commit transaction
+
+
+Started GET "/groups" for 127.0.0.1 at 2014-07-10 19:04:12 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by GroupsController#index as HTML
+  [1m[35mGroup Load (1.0ms)[0m  SELECT "groups".* FROM "groups"
+  Rendered groups/index.html.erb within layouts/application (10.0ms)
+Completed 200 OK in 448ms (Views: 411.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-07-10 19:04:13 +0300
+
+
+Started GET "/assets/groups.css?body=1" for 127.0.0.1 at 2014-07-10 19:04:13 +0300
+
+
+Started GET "/assets/posts.css?body=1" for 127.0.0.1 at 2014-07-10 19:04:13 +0300
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-07-10 19:04:13 +0300
+
+
+Started GET "/assets/welcome.css?body=1" for 127.0.0.1 at 2014-07-10 19:04:13 +0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-07-10 19:04:13 +0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-07-10 19:04:13 +0300
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-07-10 19:04:13 +0300
+
+
+Started GET "/assets/groups.js?body=1" for 127.0.0.1 at 2014-07-10 19:04:13 +0300
+
+
+Started GET "/assets/posts.js?body=1" for 127.0.0.1 at 2014-07-10 19:04:13 +0300
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-07-10 19:04:13 +0300
+
+
+Started GET "/assets/welcome.js?body=1" for 127.0.0.1 at 2014-07-10 19:04:13 +0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-07-10 19:04:13 +0300
+
+
+Started GET "/groups/send_notification" for 127.0.0.1 at 2014-07-10 19:04:20 +0300
+Processing by GroupsController#send_notification as HTML
+Completed 200 OK in 189ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/groups/send_notification" for 127.0.0.1 at 2014-07-10 19:05:27 +0300
+Processing by GroupsController#send_notification as HTML
+Completed 200 OK in 189ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/groups/send_notification" for 127.0.0.1 at 2014-07-10 19:05:45 +0300
+Processing by GroupsController#send_notification as HTML
+Completed 200 OK in 118ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/groups/send_notification" for 127.0.0.1 at 2014-07-10 19:07:37 +0300
+
+SyntaxError (C:/Wallpaper app/Wallpaper server/wallpaper/app/controllers/groups_controller.rb:90: syntax error, unexpected ':', expecting tASSOC
+  "registration_ids" : ["APA91bEkPaZ-9OgCsyiarZzWyg...
+                      ^
+C:/Wallpaper app/Wallpaper server/wallpaper/app/controllers/groups_controller.rb:90: syntax error, unexpected ',', expecting keyword_end
+C:/Wallpaper app/Wallpaper server/wallpaper/app/controllers/groups_controller.rb:91: syntax error, unexpected ':', expecting keyword_end
+  "data" : {
+          ^
+C:/Wallpaper app/Wallpaper server/wallpaper/app/controllers/groups_controller.rb:92: syntax error, unexpected ':', expecting tASSOC
+    "toto":"tata"
+           ^
+C:/Wallpaper app/Wallpaper server/wallpaper/app/controllers/groups_controller.rb:93: syntax error, unexpected '}', expecting keyword_end):
+  activesupport (4.0.2) lib/active_support/dependencies.rb:424:in `load'
+  activesupport (4.0.2) lib/active_support/dependencies.rb:424:in `block in load_file'
+  activesupport (4.0.2) lib/active_support/dependencies.rb:616:in `new_constants_in'
+  activesupport (4.0.2) lib/active_support/dependencies.rb:423:in `load_file'
+  activesupport (4.0.2) lib/active_support/dependencies.rb:324:in `require_or_load'
+  activesupport (4.0.2) lib/active_support/dependencies.rb:463:in `load_missing_constant'
+  activesupport (4.0.2) lib/active_support/dependencies.rb:184:in `const_missing'
+  activesupport (4.0.2) lib/active_support/inflector/methods.rb:226:in `const_get'
+  activesupport (4.0.2) lib/active_support/inflector/methods.rb:226:in `block in constantize'
+  activesupport (4.0.2) lib/active_support/inflector/methods.rb:224:in `each'
+  activesupport (4.0.2) lib/active_support/inflector/methods.rb:224:in `inject'
+  activesupport (4.0.2) lib/active_support/inflector/methods.rb:224:in `constantize'
+  activesupport (4.0.2) lib/active_support/dependencies.rb:535:in `get'
+  activesupport (4.0.2) lib/active_support/dependencies.rb:566:in `constantize'
+  actionpack (4.0.2) lib/action_dispatch/routing/route_set.rb:76:in `controller_reference'
+  actionpack (4.0.2) lib/action_dispatch/routing/route_set.rb:66:in `controller'
+  actionpack (4.0.2) lib/action_dispatch/routing/route_set.rb:44:in `call'
+  actionpack (4.0.2) lib/action_dispatch/journey/router.rb:71:in `block in call'
+  actionpack (4.0.2) lib/action_dispatch/journey/router.rb:59:in `each'
+  actionpack (4.0.2) lib/action_dispatch/journey/router.rb:59:in `call'
+  actionpack (4.0.2) lib/action_dispatch/routing/route_set.rb:680:in `call'
+  rack (1.5.2) lib/rack/etag.rb:23:in `call'
+  rack (1.5.2) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.5.2) lib/rack/head.rb:11:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/flash.rb:241:in `call'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/cookies.rb:486:in `call'
+  activerecord (4.0.2) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:626:in `call'
+  activerecord (4.0.2) lib/active_record/migration.rb:369:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.0.2) lib/active_support/callbacks.rb:373:in `_run__366719819__call__callbacks'
+  activesupport (4.0.2) lib/active_support/callbacks.rb:80:in `run_callbacks'
+  actionpack (4.0.2) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/reloader.rb:64:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.2) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.2) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.2) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.2) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.2) lib/rails/engine.rb:511:in `call'
+  railties (4.0.2) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  D:/RailsInstaller/Ruby1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  D:/RailsInstaller/Ruby1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  D:/RailsInstaller/Ruby1.9.3/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.0ms)
+  Rendered D:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (28.0ms)
+
+
+Started GET "/groups/send_notification" for 127.0.0.1 at 2014-07-10 19:08:55 +0300
+Processing by GroupsController#send_notification as HTML
+Completed 200 OK in 209ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/groups/send_notification" for 127.0.0.1 at 2014-07-10 19:09:22 +0300
+Processing by GroupsController#send_notification as HTML
+Completed 200 OK in 209ms (Views: 0.0ms | ActiveRecord: 0.0ms)

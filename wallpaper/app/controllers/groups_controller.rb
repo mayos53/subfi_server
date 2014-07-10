@@ -80,6 +80,27 @@ class GroupsController < ApplicationController
       @wallpaper = Wallpaper.new
    end  
   
+  def send_notification
+    uri = URI.parse("https://android.googleapis.com/gcm/send")
+    # Full control
+    http = Net::HTTP.new(uri.host)
+
+    request = Net::HTTP::Post.new(uri.request_uri)
+    request.body= {
+  :registration_ids => ["APA91bEkPaZ-9OgCsyiarZzWygfaBr-sjpTigILRsQZq1b3T-QmNxK1TwoWGxNCOoPsc1l0qECkaJQ-4hZ7sf2JGOUKJWSh2t9uB4Kg5CtzbvkOfkVzJqN0Nqb1sktgIJlQfDL6qw0ojIBuoRtnuBBa1bDHwqhXX49JFo8vJl2opwBUD7WgjVvg"],
+  :data => {
+    :toto => "tata"
+  }
+}.to_json
+    request["Authorization"] = "key=AIzaSyDZlgujjp_pKOUftg3UXVTczyvf7ZHPR-Y"
+    request["Content-Type"] = "application/json"
+    response = http.request(request)
+    render :json => response.body
+  end
+
+
+
+
   	
 
 private

@@ -18,7 +18,8 @@ Blog::Application.routes.draw do
       post 'save_user'
       get  'add_user'
       post 'save_wallpaper'
-      get  'add_wallpaper' 
+      get  'add_wallpaper'
+      get   'send_notification' 
     end
   end
   # You can have the root of your site routed with "root"
