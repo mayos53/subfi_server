@@ -35,12 +35,12 @@ class UsersController < ApplicationController
 
   def register
       @user = User.find(register_params[:id])
-      @user.registratio_id = register_params[:registrationId]
+      @user.update_attributes :registrationId => register_params[:registrationId]
       @user.save
 
       respond_to do |format|
         format.html
-        format.json {  render :json => {:registrationId => @user.registratio_id, :status => 1 ,:message => "OK"}}  
+        format.json {  render :json => {:registrationId => @user.registrationId, :status => 1 ,:message => "OK"}}  
     end
   end
  
