@@ -17,7 +17,19 @@ class GroupsController < ApplicationController
   end
 
   def show
-  	@group = Group.includes([:wallpapers,:memberships => :user]).find(params[:id])
+  	#@group = Group.includes([:wallpapers,:memberships => :user]).find(params[:id])
+    
+    #@users = []
+    
+    #@group.memberships.zip(@group.users).each do |membership, user|
+    #    @full_user = {:user => user, :administrator => membership.administrator, :status => membership.status};
+    #    @users << @full_user
+    #end
+
+    #@group_result =  { :id => @group.id, :name => @group.name,:wallpaper => @group.wallpapers[0], :users => @users}
+
+    
+    @group = Group.includes([:memberships => :user]).find(params[:id])
     
     @users = []
     
@@ -26,7 +38,8 @@ class GroupsController < ApplicationController
         @users << @full_user
     end
 
-    @group_result =  { :id => @group.id, :name => @group.name,:wallpaper => @group.wallpapers[0], :users => @users}
+    @group_result =  { :id => @group.id, :name => @group.name, :users => @users}
+   
    
     respond_to do |format|
         format.html

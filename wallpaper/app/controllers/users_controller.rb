@@ -8,7 +8,11 @@ class UsersController < ApplicationController
   def create
   	 @user = User.new(user_params)
   	 @user.save
-  	 redirect_to @user
+
+     respond_to do |format|
+        format.html { redirect_to @user}
+        format.json { render :json => {:id => @user.id,:name => @user.name,:phone => @user.phone, :countryCode => @user.countryCode, :status => 1 ,:message => "OK"}}
+     end   
   end
 
   def show
@@ -28,7 +32,7 @@ class UsersController < ApplicationController
     end
   end
 
-  
+ 
   	
 
 private
