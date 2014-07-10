@@ -33,9 +33,7 @@ gem "paperclip", "~> 4.1"
 
 gem 'therubyracer', group: :test
 
-gem 'push-core'
 
-gem 'push-gcm'
 
 
 group :doc do
