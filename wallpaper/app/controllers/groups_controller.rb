@@ -81,17 +81,31 @@ class GroupsController < ApplicationController
    end  
   
   def send_notification
-    uri = URI.parse("https://android.googleapis.com/gcm/send")
-    # Full control
-    http = Net::HTTP.new(uri.host)
+    @group = Group.find(notification_params[:group_id]);
 
+    uri = URI.parse("https://android.googleapis.com/gcm/send")
+    http = Net::HTTP.new(uri.host)
     request = Net::HTTP::Post.new(uri.request_uri)
+    
+    registration_ids = []
+    @group.users.each do |user|
+      unless user.registrationId.nil?
+        registration_ids <<  user
+      end  
+    end  
+
     request.body= {
-  :registration_ids => ["APA91bEkPaZ-9OgCsyiarZzWygfaBr-sjpTigILRsQZq1b3T-QmNxK1TwoWGxNCOoPsc1l0qECkaJQ-4hZ7sf2JGOUKJWSh2t9uB4Kg5CtzbvkOfkVzJqN0Nqb1sktgIJlQfDL6qw0ojIBuoRtnuBBa1bDHwqhXX49JFo8vJl2opwBUD7WgjVvg"],
-  :data => {
-    :toto => "tata"
-  }
-}.to_json
+        :registration_ids =>  re
+        :data => {
+          :wallpaper => "tata"
+      }.to_json
+
+    # request.body= {
+    #     :registration_ids => ["APA91bEkPaZ-9OgCsyiarZzWygfaBr-sjpTigILRsQZq1b3T-QmNxK1TwoWGxNCOoPsc1l0qECkaJQ-4hZ7sf2JGOUKJWSh2t9uB4Kg5CtzbvkOfkVzJqN0Nqb1sktgIJlQfDL6qw0ojIBuoRtnuBBa1bDHwqhXX49JFo8vJl2opwBUD7WgjVvg"],
+    #     :data => {
+    #       :toto => "tata"
+    #   }.to_json
+}
     request["Authorization"] = "key=AIzaSyDZlgujjp_pKOUftg3UXVTczyvf7ZHPR-Y"
     request["Content-Type"] = "application/json"
     response = http.request(request)
@@ -114,5 +128,9 @@ private
 
   def wallpaper_params
     params.require(:wallpaper).permit(:group_id,:photo)
+  end
+
+  def notification_params
+    params.require(:notification).permit(:group_id)
   end
 end

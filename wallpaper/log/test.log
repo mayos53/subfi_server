@@ -5,3 +5,130 @@
   [1m[36m (74.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140526085605')[0m
   [1m[35m (66.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140309171948')
   [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Started GET "/" for 127.0.0.1 at 2014-07-10 22:44:50 +0300
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 321ms (Views: 304.1ms | ActiveRecord: 0.0ms)
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-07-10 22:44:51 +0300
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-07-10 22:44:51 +0300
+Started GET "/groups" for 127.0.0.1 at 2014-07-10 22:44:59 +0300
+Processing by GroupsController#index as HTML
+  [1m[36mGroup Load (0.4ms)[0m  [1mSELECT "groups".* FROM "groups"[0m
+SQLite3::SQLException: no such table: groups: SELECT "groups".* FROM "groups"
+  Rendered groups/index.html.erb within layouts/application (3.9ms)
+Completed 500 Internal Server Error in 12ms
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateGroups (20140601140734)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140601140734"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to CreateMemberships (20140611082937)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "memberships" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "group_id" integer, "administrator" boolean, "status" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140611082937"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to RemoveTimestampsFromUser (20140622143237)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mCREATE TEMPORARY TABLE "ausers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "countryCode" text, "phone" text, "code" text, "created_at" datetime, "updated_at" datetime, "email" varchar(255)) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "users"
+  [1m[36m (0.6ms)[0m  [1mDROP TABLE "users"[0m
+  [1m[35m (0.1ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "countryCode" text, "phone" text, "code" text, "updated_at" datetime, "email" varchar(255)) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "ausers"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "ausers"
+  [1m[36m (0.2ms)[0m  [1mCREATE TEMPORARY TABLE "ausers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "countryCode" text, "phone" text, "code" text, "updated_at" datetime, "email" varchar(255)) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "users"
+  [1m[36m (0.4ms)[0m  [1mDROP TABLE "users"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "countryCode" text, "phone" text, "code" text, "email" varchar(255)) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "ausers"[0m
+  [1m[35m (0.1ms)[0m  DROP TABLE "ausers"
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140622143237"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+Migrating to RemoveTimestampsFromGroup (20140622143253)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "agroups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "groups"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "groups"
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  SELECT * FROM "agroups"
+  [1m[36m (0.1ms)[0m  [1mDROP TABLE "agroups"[0m
+  [1m[35m (0.1ms)[0m  CREATE TEMPORARY TABLE "agroups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mSELECT * FROM "groups"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "groups"
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255)) [0m
+  [1m[35m (0.0ms)[0m  SELECT * FROM "agroups"
+  [1m[36m (0.1ms)[0m  [1mDROP TABLE "agroups"[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140622143253"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to RemoveTimestampsFromMembership (20140622143305)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TEMPORARY TABLE "amemberships" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "group_id" integer, "administrator" boolean, "status" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "memberships"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "memberships"[0m
+  [1m[35m (0.1ms)[0m  CREATE TABLE "memberships" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "group_id" integer, "administrator" boolean, "status" integer, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "amemberships"[0m
+  [1m[35m (0.1ms)[0m  DROP TABLE "amemberships"
+  [1m[36m (0.1ms)[0m  [1mCREATE TEMPORARY TABLE "amemberships" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "group_id" integer, "administrator" boolean, "status" integer, "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  SELECT * FROM "memberships"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "memberships"[0m
+  [1m[35m (0.1ms)[0m  CREATE TABLE "memberships" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "group_id" integer, "administrator" boolean, "status" integer) 
+  [1m[36m (0.0ms)[0m  [1mSELECT * FROM "amemberships"[0m
+  [1m[35m (0.1ms)[0m  DROP TABLE "amemberships"
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140622143305"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Migrating to CreateWallpapers (20140623082617)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "wallpapers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "status" integer, "time" datetime, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140623082617"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Migrating to AddGroupIdToWallpapers (20140623084600)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "wallpapers" ADD "group_id" integer
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140623084600"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Migrating to AddAttachmentPhotoToWallpapers (20140623084601)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "wallpapers" ADD "photo_file_name" varchar(255)
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "wallpapers" ADD "photo_content_type" varchar(255)[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "wallpapers" ADD "photo_file_size" integer
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "wallpapers" ADD "photo_updated_at" datetime[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140623084601"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to AddRegistratioIdToUsers (20140710120001)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "registrationId" varchar(255)[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140710120001"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePush (20140710144842)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "push_configurations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "type" varchar(255) NOT NULL, "app" varchar(255) NOT NULL, "properties" text, "enabled" boolean DEFAULT 'f' NOT NULL, "connections" integer DEFAULT 1 NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "push_messages" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "app" varchar(255) NOT NULL, "device" varchar(255) NOT NULL, "type" varchar(255) NOT NULL, "properties" text, "delivered" boolean DEFAULT 'f' NOT NULL, "delivered_at" datetime, "failed" boolean DEFAULT 'f' NOT NULL, "failed_at" datetime, "error_code" integer, "error_description" varchar(255), "deliver_after" datetime, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "index_push_messages_on_delivered_and_failed_and_deliver_after" ON "push_messages" ("delivered", "failed", "deliver_after")[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "push_feedback" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "app" varchar(255) NOT NULL, "device" varchar(255) NOT NULL, "type" varchar(255) NOT NULL, "follow_up" varchar(255) NOT NULL, "failed_at" datetime NOT NULL, "processed" boolean DEFAULT 'f' NOT NULL, "processed_at" datetime, "properties" text, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "index_push_feedback_on_processed" ON "push_feedback" ("processed")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140710144842"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Started GET "/" for 127.0.0.1 at 2014-07-10 22:49:24 +0300
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 62ms (Views: 42.9ms | ActiveRecord: 0.0ms)
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-07-10 22:49:24 +0300
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-07-10 22:49:24 +0300
+Started GET "/groups" for 127.0.0.1 at 2014-07-10 22:49:32 +0300
+Processing by GroupsController#index as HTML
+  [1m[36mGroup Load (1.1ms)[0m  [1mSELECT "groups".* FROM "groups"[0m
+  Rendered groups/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 12ms (Views: 3.7ms | ActiveRecord: 1.1ms)
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-07-10 22:49:32 +0300
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-07-10 22:49:32 +0300
+Started GET "/users" for 127.0.0.1 at 2014-07-10 22:49:38 +0300
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users"
+  Rendered users/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 10ms (Views: 3.5ms | ActiveRecord: 0.2ms)
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-07-10 22:49:38 +0300
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-07-10 22:49:38 +0300
+Started GET "/groups/send_notification" for 127.0.0.1 at 2014-07-10 22:50:27 +0300
+Processing by GroupsController#send_notification as HTML
+Completed 200 OK in 708ms (Views: 0.3ms | ActiveRecord: 0.0ms)
