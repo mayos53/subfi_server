@@ -31,9 +31,11 @@ gem 'jbuilder', '~> 1.2'
 gem "paperclip", "~> 4.1"
 
 
-gem 'therubyracer', group: :test
 
 
+# group :test do
+# 	gem 'therubyracer' 
+# end
 
 
 group :doc do

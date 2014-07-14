@@ -19,7 +19,8 @@ Blog::Application.routes.draw do
       get  'add_user'
       post 'save_wallpaper'
       get  'add_wallpaper'
-      get   'send_notification' 
+      get  'send_notification' 
+      get  'user/:id' => 'groups#groups_by_user'
     end
   end
   # You can have the root of your site routed with "root"

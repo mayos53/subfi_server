@@ -43,21 +43,43 @@ class GroupsController < ApplicationController
    
     respond_to do |format|
         format.html
-        format.json { render :json => @group_result.to_json }
+        format.json { render :json => {:group => @group_result , :status => 1 ,:message => "OK"}}
     end
 
   end
 
   def index
-  	  @groups = Group.all
-  	   respond_to do |format|
+      @groups = Group.all
+   	   respond_to do |format|
         format.html
         format.json { render :json => @groups.to_json }
         end
   end
 
+   def groups_by_user
+     
+      @groups_temp = Group.all(:include => {:memberships => :user}, :conditions => ['users.id=?', params[:id]])
+      @groups = Group.includes([:memberships => :user]).where(:id => @groups_temp.map{|group| group.id})
+
+      
+      @group_result = []
+      @groups.each do |group|
+          @users = []
+          group.memberships.zip(group.users).each do |membership, user|
+              @full_user = {:user => user, :administrator => membership.administrator, :status => membership.status};
+              @users << @full_user
+          end
+          @group_result <<  { :id => group.id, :name => group.name, :users => @users}
+      end     
+
+       respond_to do |format|
+        format.html
+        format.json { render :json =>{:groups => @group_result , :status => 1 ,:message => "OK"}}
+        end
+  end
+
   def save_user
-    @user  = User.find(group_user_params[:user_id])
+    @user  = User.find(:all, :conditions => [ "phone = ?", group_user_params[:phone]])
     @group = Group.find(group_user_params[:group_id])
     @membership = Membership.new(:user => @user , :group => @group, :administrator => false , :status => 1)
     @membership.save
@@ -95,9 +117,10 @@ class GroupsController < ApplicationController
     end  
 
     request.body= {
-        :registration_ids =>  re
+        :registration_ids =>  registration_ids,
         :data => {
           :wallpaper => "tata"
+        }
       }.to_json
 
     # request.body= {
@@ -105,7 +128,7 @@ class GroupsController < ApplicationController
     #     :data => {
     #       :toto => "tata"
     #   }.to_json
-}
+
     request["Authorization"] = "key=AIzaSyDZlgujjp_pKOUftg3UXVTczyvf7ZHPR-Y"
     request["Content-Type"] = "application/json"
     response = http.request(request)
@@ -123,7 +146,7 @@ private
   end
 
   def group_user_params
-    params.require(:group_post).permit(:user_id,:group_id)
+    params.require(:group_user).permit(:phone,:group_id)
   end
 
   def wallpaper_params
@@ -132,5 +155,9 @@ private
 
   def notification_params
     params.require(:notification).permit(:group_id)
+  end
+
+   def user_params
+    params.require(:user).permit(:user_id)
   end
 end

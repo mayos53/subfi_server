@@ -37,7 +37,7 @@ class UsersController < ApplicationController
       @user = User.find(register_params[:id])
       @user.update_attributes :registrationId => register_params[:registrationId]
       @user.save
-
+      
       respond_to do |format|
         format.html
         format.json {  render :json => {:registrationId => @user.registrationId, :status => 1 ,:message => "OK"}}  
