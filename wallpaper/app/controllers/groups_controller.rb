@@ -5,6 +5,9 @@ class GroupsController < ApplicationController
  
   def create
 
+         logger.info "********************************************************create_params**#{group_params.inspect}*************************************"
+ 
+
      @group = Group.new(:name=>group_params[:name])
      @group.save
 
@@ -13,7 +16,8 @@ class GroupsController < ApplicationController
      @membership = Membership.new(:user => @user , :group => @group, :administrator => true , :status => 1)
      @membership.save
 
-  	redirect_to groups_path
+  	 redirect_to :action => 'groups_by_user' ,:id => @user.id,:format => 'json' and return
+
   end
 
   def show
@@ -79,11 +83,14 @@ class GroupsController < ApplicationController
   end
 
   def save_user
-    @user  = User.find(:all, :conditions => [ "phone = ?", group_user_params[:phone]])
+    logger.info "********************************************************phone**#{group_user_params[:phone]}*************************************"
+    @user  = User.where(:phone => group_user_params[:phone]).first
+    logger.info "********************************************************user**#{@user.inspect}*************************************"
+
     @group = Group.find(group_user_params[:group_id])
     @membership = Membership.new(:user => @user , :group => @group, :administrator => false , :status => 1)
     @membership.save
-    redirect_to @group
+    redirect_to group_path(@group, format: :json)
   end  
 
   def save_wallpaper
@@ -142,11 +149,11 @@ class GroupsController < ApplicationController
 
 private
   def group_params
-    params.require(:group).permit(:user_id,:name)
+    params.permit(:user_id,:name)
   end
 
   def group_user_params
-    params.require(:group_user).permit(:phone,:group_id)
+    params.permit(:phone,:group_id)
   end
 
   def wallpaper_params
