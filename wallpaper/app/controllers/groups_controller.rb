@@ -94,11 +94,10 @@ class GroupsController < ApplicationController
   end  
 
   def save_wallpaper
-     logger.info "********************************************************#{wallpaper_params.inspect}*************************************"
      @wallpaper = Wallpaper.new(wallpaper_params)
      @wallpaper.save
      @group = Group.find(wallpaper_params[:group_id])
-     redirect_to @group
+     redirect_to group_path(@group, format: :json)
   end  
 
   def add_user
