@@ -63,7 +63,7 @@ class GroupsController < ApplicationController
    def groups_by_user
      
       @groups_temp = Group.all(:include => {:memberships => :user}, :conditions => ['users.id=?', params[:id]])
-      @groups = Group.includes([:memberships => :user]).where(:id => @groups_temp.map{|group| group.id})
+      @groups = Group.includes([:wallpapers,:memberships => :user]).where(:id => @groups_temp.map{|group| group.id})
 
       
       @group_result = []
@@ -73,7 +73,7 @@ class GroupsController < ApplicationController
               @full_user = {:user => user, :administrator => membership.administrator, :status => membership.status};
               @users << @full_user
           end
-          @group_result <<  { :id => group.id, :name => group.name, :users => @users}
+          @group_result <<  { :id => group.id, :name => group.name,:wallpaper => group.wallpapers[0], :users => @users}
       end     
 
        respond_to do |format|
@@ -96,8 +96,8 @@ class GroupsController < ApplicationController
   def save_wallpaper
      @wallpaper = Wallpaper.new(wallpaper_params)
      @wallpaper.save
-     @group = Group.find(wallpaper_params[:group_id])
-     redirect_to group_path(@group, format: :json)
+     @group = Group.includes([:wallpapers,:memberships => :user]).find(wallpaper_params[:group_id])
+     send_notification
   end  
 
   def add_user
@@ -109,7 +109,7 @@ class GroupsController < ApplicationController
    end  
   
   def send_notification
-    @group = Group.find(notification_params[:group_id]);
+    #@group = Group.find(notification_params[:group_id]);
 
     uri = URI.parse("https://android.googleapis.com/gcm/send")
     http = Net::HTTP.new(uri.host)
@@ -125,7 +125,7 @@ class GroupsController < ApplicationController
     request.body= {
         :registration_ids =>  registration_ids,
         :data => {
-          :wallpaper => "tata"
+          :wallpaper_path => @group.wallpaper[0].photo.url(:medium) 
         }
       }.to_json
 
@@ -138,7 +138,12 @@ class GroupsController < ApplicationController
     request["Authorization"] = "key=AIzaSyDZlgujjp_pKOUftg3UXVTczyvf7ZHPR-Y"
     request["Content-Type"] = "application/json"
     response = http.request(request)
-    render :json => response.body
+    if response[:failure] > 0
+        render :json => {:status => -1, :message =>"error"}
+    else  
+        redirect_to group_path(@group, format: :json)
+    end
+    
   end
 
 
