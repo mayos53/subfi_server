@@ -34,6 +34,8 @@ Blog::Application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  config.assets.debug = true
+
   # Paperclip.options[:command_path] = "/opt/ImageMagick/bin"
   Paperclip.options[:command_path] = "/usr/bin"
  
