@@ -114,7 +114,6 @@ class GroupsController < ApplicationController
    end  
   
   def send_notification
-    @group = Group.find(notification_params[:group_id]);
 
     uri = URI.parse("https://android.googleapis.com/gcm/send")
     http = Net::HTTP.new(uri.host)
