@@ -126,6 +126,8 @@ class GroupsController < ApplicationController
         registration_ids <<  user
       end  
     end  
+        logger.info "********************************************************group**#{@group.inspect}*************************************"
+
 
     request.body= {
         :registration_ids =>  registration_ids,
