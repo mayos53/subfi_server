@@ -145,6 +145,7 @@ class GroupsController < ApplicationController
     request["Authorization"] = "key=AIzaSyDZlgujjp_pKOUftg3UXVTczyvf7ZHPR-Y"
     request["Content-Type"] = "application/json"
     response = http.request(request)
+    logger.info response.inspect
     if response[:failure] > 0
         render :json => {:status => -1, :message =>"error"}
     else  
