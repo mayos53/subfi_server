@@ -73,6 +73,7 @@ class GroupsController < ApplicationController
               @full_user = {:user => user, :administrator => membership.administrator, :status => membership.status};
               @users << @full_user
           end
+          logger.info "********************************************************photo**#{group.wallpapers[0].photo.url(:medium)}************"
           @group_result <<  { :id => group.id, :name => group.name,:wallpaper => group.wallpapers[0].photo.url(:medium) , :users => @users}
       end     
 
