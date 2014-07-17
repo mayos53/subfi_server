@@ -30,7 +30,7 @@ class GroupsController < ApplicationController
        @users << @full_user
     end
 
-    @group_result =  { :id => @group.id, :name => @group.name,:wallpaper => @group.wallpapers[0], :users => @users}
+    @group_result =  { :id => @group.id, :name => @group.name,:wallpaper => @group.wallpapers[0].photo.url(:medium) , :users => @users}
 
     
     # @group = Group.includes([:memberships => :user]).find(params[:id])
@@ -73,7 +73,7 @@ class GroupsController < ApplicationController
               @full_user = {:user => user, :administrator => membership.administrator, :status => membership.status};
               @users << @full_user
           end
-          @group_result <<  { :id => group.id, :name => group.name,:wallpaper => group.wallpapers[0], :users => @users}
+          @group_result <<  { :id => group.id, :name => group.name,:wallpaper => group.wallpapers[0].photo.url(:medium) , :users => @users}
       end     
 
        respond_to do |format|
