@@ -132,7 +132,7 @@ class GroupsController < ApplicationController
     request.body= {
         :registration_ids =>  registration_ids,
         :data => {
-          :wallpaper_path => @group.wallpaper[0].photo.url(:medium) 
+          :wallpaper_path => group.wallpaper[0].photo.url(:medium) 
         }
       }.to_json
 
