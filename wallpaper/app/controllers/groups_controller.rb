@@ -61,7 +61,7 @@ class GroupsController < ApplicationController
   end
 
   def add_host_prefix(url)
-    URI.join(ActionController::Base.asset_host, url)
+    URI.join(request.url, url)
   end
 
    def groups_by_user
