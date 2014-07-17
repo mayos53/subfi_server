@@ -102,7 +102,7 @@ class GroupsController < ApplicationController
      @wallpaper = Wallpaper.new(wallpaper_params)
      @wallpaper.save
      @group = Group.includes([:wallpapers,:memberships => :user]).find(wallpaper_params[:group_id])
-     send_notification(@group)
+     send_notification
   end  
 
   def add_user
@@ -113,26 +113,25 @@ class GroupsController < ApplicationController
       @wallpaper = Wallpaper.new
    end  
   
-  def send_notification(group)
-    #@group = Group.find(notification_params[:group_id]);
+  def send_notification
+    @group = Group.find(notification_params[:group_id]);
 
     uri = URI.parse("https://android.googleapis.com/gcm/send")
     http = Net::HTTP.new(uri.host)
     request = Net::HTTP::Post.new(uri.request_uri)
     
     registration_ids = []
-    group.users.each do |user|
+    @group.users.each do |user|
       unless user.registrationId.nil?
         registration_ids <<  user.registrationId
       end  
     end  
-        logger.info "********************************************************group**#{group.inspect}*************************************"
 
 
     request.body= {
         :registration_ids =>  registration_ids,
         :data => {
-          :wallpaper_path => add_host_prefix(group.wallpapers[0].photo.url(:medium)) 
+          :wallpaper_path => add_host_prefix(@group.wallpapers[0].photo.url(:medium)) 
         }
       }.to_json
 
