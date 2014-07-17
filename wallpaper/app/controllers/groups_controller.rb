@@ -146,7 +146,9 @@ class GroupsController < ApplicationController
     request["Content-Type"] = "application/json"
     response = http.request(request)
     logger.info "**********#{response.body.inspect}*****"
-    if JSON.parse(response.body)[:failure] > 0
+    response_parsed = JSON.parse(response.body)
+
+    if rresponse_parsed["failure"] > 0
         render :json => {:status => -1, :message =>"error"}
     else  
         redirect_to group_path(@group, format: :json)
