@@ -61,7 +61,7 @@ class GroupsController < ApplicationController
   end
 
   def add_host_prefix(url)
-    URI.join(request.url, url)
+    URI.join(request.url, url).to_s
   end
 
    def groups_by_user
