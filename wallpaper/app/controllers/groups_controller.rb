@@ -30,7 +30,7 @@ class GroupsController < ApplicationController
        @users << @full_user
     end
 
-    @group_result =  { :id => @group.id, :name => @group.name,:wallpaper => add_host_prefix(@group.wallpapers[0].photo.url(:medium)) , :users => @users}
+    @group_result =  { :id => @group.id, :name => @group.name,:wallpaper => add_host_prefix(@group.wallpapers.last.photo.url(:medium)) , :users => @users}
 
     
     # @group = Group.includes([:memberships => :user]).find(params[:id])
@@ -78,7 +78,7 @@ class GroupsController < ApplicationController
               @users << @full_user
           end
           logger.info "********************************************************photo**#{group.wallpapers[0].photo.url(:medium)}************"
-          @group_result <<  { :id => group.id, :name => group.name,:wallpaper => add_host_prefix(group.wallpapers[0].photo.url(:medium)) , :users => @users}
+          @group_result <<  { :id => group.id, :name => group.name,:wallpaper => add_host_prefix(group.wallpapers.last.photo.url(:medium)) , :users => @users}
       end     
 
        respond_to do |format|
@@ -130,7 +130,7 @@ class GroupsController < ApplicationController
     request.body= {
         :registration_ids =>  registration_ids,
         :data => {
-          :wallpaper_path => add_host_prefix(@group.wallpapers[0].photo.url(:medium)) 
+          :wallpaper_path => add_host_prefix(@group.wallpapers.last.photo.url(:medium)) 
         }
       }.to_json
 
