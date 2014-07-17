@@ -60,6 +60,10 @@ class GroupsController < ApplicationController
         end
   end
 
+  def add_host_prefix(url)
+    URI.join(ActionController::Base.asset_host, url)
+  end
+
    def groups_by_user
      
       @groups_temp = Group.all(:include => {:memberships => :user}, :conditions => ['users.id=?', params[:id]])
@@ -74,7 +78,7 @@ class GroupsController < ApplicationController
               @users << @full_user
           end
           logger.info "********************************************************photo**#{group.wallpapers[0].photo.url(:medium)}************"
-          @group_result <<  { :id => group.id, :name => group.name,:wallpaper => group.wallpapers[0].photo.url(:medium) , :users => @users}
+          @group_result <<  { :id => group.id, :name => group.name,:wallpaper => add_host_prefix(group.wallpapers[0].photo.url(:medium)) , :users => @users}
       end     
 
        respond_to do |format|
