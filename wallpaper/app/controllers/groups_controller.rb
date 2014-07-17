@@ -123,7 +123,7 @@ class GroupsController < ApplicationController
     registration_ids = []
     group.users.each do |user|
       unless user.registrationId.nil?
-        registration_ids <<  user
+        registration_ids <<  user.registrationId
       end  
     end  
         logger.info "********************************************************group**#{group.inspect}*************************************"
@@ -146,7 +146,7 @@ class GroupsController < ApplicationController
     request["Content-Type"] = "application/json"
     response = http.request(request)
     logger.info "**********#{response.body.inspect}*****"
-    if response.body[:failure] > 0
+    if JSON.parse(response.body)[:failure] > 0
         render :json => {:status => -1, :message =>"error"}
     else  
         redirect_to group_path(@group, format: :json)
