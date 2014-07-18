@@ -109,7 +109,7 @@ class GroupsController < ApplicationController
   end  
 
   def get_group_wallpaper_path(group,style) 
-    if group.wallpapers!= nil
+    if group.wallpapers != nil and group.wallpapers.exists?
       if style != nil
          add_host_prefix(group.wallpapers.last.photo.url(style))
       else    
