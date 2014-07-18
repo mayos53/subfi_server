@@ -7,4 +7,11 @@ class User < ActiveRecord::Base
      options[:except] ||= [:created_at, :updated_at]
      super(options)
    end
+
+   def to_h
+   	{
+   		id: @id,
+   		name: @name
+   	}			
+   end	
 end
