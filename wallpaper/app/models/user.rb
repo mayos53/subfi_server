@@ -10,8 +10,8 @@ class User < ActiveRecord::Base
 
    def to_h
    	{
-   		id: :id,
-   		name: :name
+   		id: [:id],
+   		name: [:name]
    	}			
    end	
 end
