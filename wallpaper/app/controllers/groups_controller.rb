@@ -30,7 +30,7 @@ class GroupsController < ApplicationController
        @users << @full_user
     end
 
-    @group_result =  { :id => @group.id, :name => @group.name,:wallpaper => add_host_prefix(@group.wallpapers.last.photo.url(:medium)) , :users => @users}
+    @group_result =  { :id => @group.id, :name => @group.name,:wallpaper => get_group_wallpaper_path(group,:medium) , :users => @users}
 
     
     # @group = Group.includes([:memberships => :user]).find(params[:id])
@@ -77,8 +77,7 @@ class GroupsController < ApplicationController
               @full_user = {:user => user, :administrator => membership.administrator, :status => membership.status};
               @users << @full_user
           end
-          logger.info "********************************************************photo**#{group.wallpapers[0].photo.url(:medium)}************"
-          @group_result <<  { :id => group.id, :name => group.name,:wallpaper => add_host_prefix(group.wallpapers.last.photo.url(:medium)) , :users => @users}
+          @group_result <<  { :id => group.id, :name => group.name,:wallpaper =>  get_group_wallpaper_path(group,:medium), :users => @users}
       end     
 
        respond_to do |format|
@@ -109,6 +108,17 @@ class GroupsController < ApplicationController
 
   end  
 
+  def get_group_wallpaper_path(group,style) 
+    if group.wallpapers!= nil
+      if style != nil
+         add_host_prefix(group.wallpapers.last.photo.url(style))
+      else    
+         add_host_prefix(group.wallpapers.last.photo.url)
+      end   
+    else
+      return nil  
+  end  
+
    def add_wallpaper
       @wallpaper = Wallpaper.new
    end  
@@ -130,7 +140,7 @@ class GroupsController < ApplicationController
     request.body= {
         :registration_ids =>  registration_ids,
         :data => {
-          :wallpaper_path => add_host_prefix(@group.wallpapers.last.photo.url(:medium)) 
+          :wallpaper_path => get_group_wallpaper_path(group,nil)
         }
       }.to_json
 
