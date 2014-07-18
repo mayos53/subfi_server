@@ -26,7 +26,7 @@ class GroupsController < ApplicationController
     @users = []
     
     @group.memberships.zip(@group.users).each do |membership, user|
-       @full_user = {:user => user, :administrator => membership.administrator, :status => membership.status};
+       @full_user = user.merge({:administrator => membership.administrator, :status => membership.status});
        @users << @full_user
     end
 
