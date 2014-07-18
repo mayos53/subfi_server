@@ -116,7 +116,8 @@ class GroupsController < ApplicationController
          add_host_prefix(group.wallpapers.last.photo.url)
       end   
     else
-      return nil  
+      return nil
+    end    
   end  
 
    def add_wallpaper
