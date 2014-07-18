@@ -74,7 +74,7 @@ class GroupsController < ApplicationController
       @groups.each do |group|
           @users = []
           group.memberships.zip(group.users).each do |membership, user|
-              @full_user = user.to_h.merge({:user => user, :administrator => membership.administrator, :status => membership.status});
+              @full_user = user.as_json.merge({:user => user, :administrator => membership.administrator, :status => membership.status});
               @users << @full_user
           end
           @group_result <<  { :id => group.id, :name => group.name,:wallpaper =>  get_group_wallpaper_path(group,:medium), :users => @users}
