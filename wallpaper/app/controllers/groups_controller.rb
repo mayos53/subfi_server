@@ -30,7 +30,7 @@ class GroupsController < ApplicationController
        @users << @full_user
     end
 
-    @group_result =  { :id => @group.id, :name => @group.name,:wallpaper => get_group_wallpaper_path(group,:medium) , :users => @users}
+    @group_result =  { :id => @group.id, :name => @group.name,:wallpaper => get_group_wallpaper_path(@group,:medium) , :users => @users}
 
     
     # @group = Group.includes([:memberships => :user]).find(params[:id])
