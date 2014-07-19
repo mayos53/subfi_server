@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
    def to_h
    	{
    		id: self.id,
-   		name: self.name
+   		name: self.name,
    		phone: self.phone
 
    	}			
