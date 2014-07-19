@@ -91,7 +91,7 @@ class GroupsController < ApplicationController
     @user  = User.where(:phone => group_user_params[:phone]).first
     logger.info "********************************************************user**#{@user.inspect}*************************************"
 
-    if(@user.exists?)
+    if @user != nil
         @group = Group.find(group_user_params[:group_id])
         @membership = Membership.new(:user => @user , :group => @group, :administrator => false , :status => 1)
         @membership.save
