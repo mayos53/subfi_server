@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
    	{
    		id: self.id,
    		name: self.name
+   		phone: self.phone
+
    	}			
    end	
 end
