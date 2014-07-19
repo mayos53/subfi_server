@@ -91,10 +91,15 @@ class GroupsController < ApplicationController
     @user  = User.where(:phone => group_user_params[:phone]).first
     logger.info "********************************************************user**#{@user.inspect}*************************************"
 
-    @group = Group.find(group_user_params[:group_id])
-    @membership = Membership.new(:user => @user , :group => @group, :administrator => false , :status => 1)
-    @membership.save
-    redirect_to group_path(@group, format: :json)
+    if(@user.exists?)
+        @group = Group.find(group_user_params[:group_id])
+        @membership = Membership.new(:user => @user , :group => @group, :administrator => false , :status => 1)
+        @membership.save
+        redirect_to group_path(@group, format: :json)
+   else
+        render :json =>{:status => -1 ,:message => "Contact not found"}
+    
+    end    
   end  
 
   def save_wallpaper
