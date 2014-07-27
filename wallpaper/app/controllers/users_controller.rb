@@ -7,8 +7,11 @@ class UsersController < ApplicationController
  
   def create
   	 @user = User.new(user_params)
-  	 @user.save
-
+     
+     @user.code = random_number
+     @user.save
+     
+     # send_confirmation_code
      respond_to do |format|
         format.html { redirect_to @user}
         format.json { render :json => {:id => @user.id,:name => @user.name,:phone => @user.phone, :countryCode => @user.countryCode, :status => 1 ,:message => "OK"}}
@@ -44,7 +47,55 @@ class UsersController < ApplicationController
     end
   end
  
+
+ def confirm_registration
+      @user = User.find(confirm_params[:id])
+      if @user.code == confirm_params[:code]
+        render :json => {:status => 1 ,:message => "OK"} 
+      else
+        render :json => {:status => -2 ,:message => "Code not correct"}  
+      end  
+      
+  end
+
+  def resend_code
+    @user = User.find(resend_code_params[:id])
+    @user.code = random_number
+    @user.save
+    
+    if send_confirmation_code?
+        render :json => {:status => 1 ,:message => "OK"} 
+    else
+        render :json => {:status => -3 ,:message => "Error in sending code"}  
+    end  
+
+  end  
   	
+  def send_confirmation_code
+    user = "mayos53"
+    password ="HaVMZFHMEVDQTC"
+    api_id = "3490213"
+    number = @user.phone
+
+    url_send = "http://api.clickatell.com/http/sendmsg?&api_id="+api_id+"&user="+user+"&password="+password+"&to="+number.to_s+"&text="+@user.code.to_s
+
+    logger.info url_send
+
+    uri = URI.parse(url_send)
+    http = Net::HTTP.new(uri.host)
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    if response.body.start_with?("ID")
+      logger.info "SMS sent"
+    else
+      logger.info "SMS not sent"
+    end  
+
+
+     
+
+  end  
+
 
 private
   def user_params
@@ -53,6 +104,19 @@ private
 
   def register_params
     params.require(:user).permit(:id,:registrationId)
+  end 
+  def confirm_params
+    params.require(:user).permit(:id,:code)
   end  
 
+   def resend_code_params
+    params.require(:user).permit(:id)
+  end 
+
+
+  def random_number
+    1_001+ Random.rand(9_999 - 1_001) 
+  end 
+
 end
+
