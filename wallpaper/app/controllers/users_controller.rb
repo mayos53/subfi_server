@@ -6,15 +6,22 @@ class UsersController < ApplicationController
   end
  
   def create
-  	 @user = User.new(user_params)
-     
+  	
+     if User.where(:phone => user_params[:phone]).first != nil
+        render :json => {:status => RESPONSE_ERROR_USER_ALREADY_EXISTS ,:message => "Error"}
+        return
+     end   
+
+     @user = User.new(user_params)
+     @user.update_attributes :phone => get_phone_number(user_params[:phone],user_params[:countryCode])
+
      @user.code = random_number
      @user.save
      
      # send_confirmation_code
      respond_to do |format|
         format.html { redirect_to @user}
-        format.json { render :json => {:id => @user.id,:name => @user.name,:phone => @user.phone, :countryCode => @user.countryCode, :status => 1 ,:message => "OK"}}
+        format.json { render :json => {:id => @user.id,:name => @user.name,:phone => @user.phone, :countryCode => @user.countryCode, :status => RESPONSE_OK ,:message => "OK"}}
      end   
   end
 
@@ -43,7 +50,7 @@ class UsersController < ApplicationController
       
       respond_to do |format|
         format.html
-        format.json {  render :json => {:registrationId => @user.registrationId, :status => 1 ,:message => "OK"}}  
+        format.json {  render :json => {:registrationId => @user.registrationId, :status => RESPONSE_OK ,:message => "OK"}}  
     end
   end
  
@@ -51,9 +58,9 @@ class UsersController < ApplicationController
  def confirm_registration
       @user = User.find(confirm_params[:id])
       if @user.code == confirm_params[:code]
-        render :json => {:status => 1 ,:message => "OK"} 
+        render :json => {:status => RESPONSE_OK ,:message => "OK"} 
       else
-        render :json => {:status => -2 ,:message => "Code not correct"}  
+        render :json => {:status => RESPONSE_ERROR_CODE_NOT_CORRECT ,:message => "Code not correct"}  
       end  
       
   end
@@ -64,9 +71,9 @@ class UsersController < ApplicationController
     @user.save
     
     if send_confirmation_code?
-        render :json => {:status => 1 ,:message => "OK"} 
+        render :json => {:status => RESPONSE_OK ,:message => "OK"} 
     else
-        render :json => {:status => -3 ,:message => "Error in sending code"}  
+        render :json => {:status => RESPONSE_ERROR_SENDING_CODE ,:message => "Error in sending code"}  
     end  
 
   end  
@@ -117,6 +124,14 @@ private
   def random_number
     1_001+ Random.rand(9_999 - 1_001) 
   end 
+
+  # get phone with country_code
+   def get_phone_number(phone,countryCode)
+     if phone.start_with?("0")
+      phone = phone[1..-1]
+     end  
+     countryCode.to_s+phone
+   end    
 
 end
 

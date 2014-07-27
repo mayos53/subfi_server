@@ -6,14 +6,20 @@ class GroupsController < ApplicationController
   def create
 
          logger.info "********************************************************create_params**#{group_params.inspect}*************************************"
- 
+    
+
+     #check if group exists
+     if Group.where(:name => group_params[:name]).first != nil
+        render :json => {:status => RESPONSE_ERROR_GROUP_ALREADY_EXISTS ,:message => "Error"}
+        return
+     end   
 
      @group = Group.new(:name=>group_params[:name])
      @group.save
 
   	 @user = User.find(group_params[:user_id])
 
-     @membership = Membership.new(:user => @user , :group => @group, :administrator => true , :status => 1)
+     @membership = Membership.new(:user => @user , :group => @group, :administrator => true , :status => RESPONSE_OK)
      @membership.save
 
   	 redirect_to :action => 'groups_by_user' ,:id => @user.id,:format => 'json' and return
@@ -47,7 +53,7 @@ class GroupsController < ApplicationController
    
     respond_to do |format|
         format.html
-        format.json { render :json => {:group => @group_result , :status => 1 ,:message => "OK"}}
+        format.json { render :json => {:group => @group_result , :status => RESPONSE_OK ,:message => "OK"}}
     end
 
   end
@@ -82,22 +88,26 @@ class GroupsController < ApplicationController
 
        respond_to do |format|
         format.html
-        format.json { render :json =>{:groups => @group_result , :status => 1 ,:message => "OK"}}
+        format.json { render :json =>{:groups => @group_result , :status => RESPONSE_OK ,:message => "OK"}}
         end
   end
 
   def save_user
-    logger.info "********************************************************phone**#{group_user_params[:phone]}*************************************"
     @user  = User.where(:phone => group_user_params[:phone]).first
-    logger.info "********************************************************user**#{@user.inspect}*************************************"
 
-    if @user != nil
+    # check if contact installed application
+    # check it is already member of the group
+    if @user != nil 
         @group = Group.find(group_user_params[:group_id])
-        @membership = Membership.new(:user => @user , :group => @group, :administrator => false , :status => 1)
-        @membership.save
-        redirect_to group_path(@group, format: :json)
+        if Membership.where(:user => @user).where(:group => @user).first == nil
+          @membership = Membership.new(:user => @user , :group => @group, :administrator => false , :status => RESPONSE_OK)
+          @membership.save
+          redirect_to group_path(@group, format: :json)
+        else
+          render :json =>{:status => RESPONSE_ERROR_CONTACT_ALREADY_MEMBER ,:message => "Contact already member"}
+        end  
    else
-        render :json =>{:status => -1 ,:message => "Contact not found"}
+        render :json =>{:status => RESPONSE_ERROR_CONTACT_NOT_FOUND ,:message => "Contact not found"}
     
     end    
   end  
@@ -164,7 +174,7 @@ class GroupsController < ApplicationController
     response_parsed = JSON.parse(response.body)
 
     if response_parsed["failure"] > 0
-        render :json => {:status => -1, :message =>"error"}
+        render :json => {:status => RESPONSE_ERROR, :message =>"error"}
     else  
         redirect_to group_path(@group, format: :json)
     end
