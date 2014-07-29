@@ -1,4 +1,6 @@
 class GroupsController < ApplicationController
+  include GroupsHelper
+  include UsersHelper
 
 	respond_to :html, :xml, :json	
  
@@ -19,7 +21,7 @@ class GroupsController < ApplicationController
 
   	 @user = User.find(group_params[:user_id])
 
-     @membership = Membership.new(:user => @user , :group => @group, :administrator => true , :status => RESPONSE_OK)
+     @membership = Membership.new(:user => @user , :group => @group, :administrator => true , :status => 1)
      @membership.save
 
   	 redirect_to :action => 'groups_by_user' ,:id => @user.id,:format => 'json' and return
@@ -66,9 +68,7 @@ class GroupsController < ApplicationController
         end
   end
 
-  def add_host_prefix(url)
-    URI.join(request.url, url).to_s
-  end
+  
 
    def groups_by_user
      
@@ -93,14 +93,16 @@ class GroupsController < ApplicationController
   end
 
   def save_user
-    @user  = User.where(:phone => group_user_params[:phone]).first
+    phone = get_phone_number(params[:phone],params[:countryCode])
+
+    @user  = User.where(:phone => phone).first
 
     # check if contact installed application
     # check it is already member of the group
     if @user != nil 
         @group = Group.find(group_user_params[:group_id])
         if Membership.where(:user => @user).where(:group => @user).first == nil
-          @membership = Membership.new(:user => @user , :group => @group, :administrator => false , :status => RESPONSE_OK)
+          @membership = Membership.new(:user => @user , :group => @group, :administrator => false , :status => 1)
           @membership.save
           redirect_to group_path(@group, format: :json)
         else
@@ -123,18 +125,7 @@ class GroupsController < ApplicationController
 
   end  
 
-  def get_group_wallpaper_path(group,style) 
-   logger.info "**group.wallpapers*** #{group.wallpapers.inspect}******"
-    if group.wallpapers != nil and group.wallpapers.exists?
-      if style != nil
-         add_host_prefix(group.wallpapers.last.photo.url(style))
-      else    
-         add_host_prefix(group.wallpapers.last.photo.url)
-      end   
-    else
-      return nil
-    end    
-  end  
+  
 
    def add_wallpaper
       @wallpaper = Wallpaper.new
@@ -192,7 +183,7 @@ private
   end
 
   def group_user_params
-    params.permit(:phone,:group_id)
+    params.permit(:phone,:countryCode,:group_id)
   end
 
   def wallpaper_params
