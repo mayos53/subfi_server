@@ -101,7 +101,7 @@ class GroupsController < ApplicationController
     # check it is already member of the group
     if @user != nil 
         @group = Group.find(group_user_params[:group_id])
-        if Membership.where(:user => @user).where(:group => @user).first == nil
+        if Membership.where(:user => @user).where(:group => @group).first == nil
           @membership = Membership.new(:user => @user , :group => @group, :administrator => false , :status => 1)
           @membership.save
           redirect_to group_path(@group, format: :json)
