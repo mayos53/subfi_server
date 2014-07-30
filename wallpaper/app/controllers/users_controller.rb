@@ -8,13 +8,12 @@ class UsersController < ApplicationController
  
   def create
   	
-     if User.where(:phone => user_params[:phone]).first != nil
-        render :json => {:status => RESPONSE_ERROR_USER_ALREADY_EXISTS ,:message => "Error"}
-        return
+     phone = get_phone_number(user_params[:phone],user_params[:countryCode])
+     @user = User.where(:phone => phone).first
+     if @user == nil
+        @user = User.new(user_params)
+        @user.phone = phone
      end   
-
-     @user = User.new(user_params)
-     @user.update_attributes :phone => get_phone_number(user_params[:phone],user_params[:countryCode])
 
      @user.code = random_number
      @user.save
