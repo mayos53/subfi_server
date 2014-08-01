@@ -131,8 +131,8 @@ private
     params.require(:user).permit(:id)
   end 
 
-  def filter_users_params
-    params.permit(:group_id,:contacts)
+  def get_contacts_params
+    params.require(:user).permit(:group_id,:contacts)
   end 
 
 
