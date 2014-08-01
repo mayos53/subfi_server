@@ -104,7 +104,7 @@ class UsersController < ApplicationController
   end  
 
   #get list of contacts numbers and returns those who are app users;
-  def filter_users
+  def get_contacts
     contacts = filter_users_params[:contacts]
     group_id = filter_users_params[:group_id]
 

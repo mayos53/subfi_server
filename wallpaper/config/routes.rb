@@ -7,7 +7,7 @@ Blog::Application.routes.draw do
         post 'register'
         post 'confirm_registration'
         post 'resend_code'
-        post 'filter_users'
+        post 'get_contacts'
       end
     end
 
