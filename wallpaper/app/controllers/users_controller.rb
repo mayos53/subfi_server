@@ -105,8 +105,8 @@ class UsersController < ApplicationController
 
   #get list of contacts numbers and returns those who are app users;
   def get_contacts
-    contacts = filter_users_params[:contacts]
-    group_id = filter_users_params[:group_id]
+    contacts = get_contacts_params[:contacts]
+    group_id = get_contacts_params[:group_id]
 
      users = User.includes([:wallpapers,:memberships => :group]).where.not(groups: {id: group_id}).references(:group)
                                                         .where(:phone => contacts.map{|contact| get_phone_number(contact[:phone],contact[:countryCode])})
