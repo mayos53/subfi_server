@@ -93,7 +93,7 @@ class GroupsController < ApplicationController
   end
 
   def save_user
-    phone = get_phone_number(params[:phone],params[:countryCode])
+    phone = get_phone_number(group_user_params[:phone],group_user_params[:countryCode])
 
     @user  = User.where(:phone => phone).first
 
