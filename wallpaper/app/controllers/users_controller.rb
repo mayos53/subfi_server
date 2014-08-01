@@ -132,7 +132,7 @@ private
   end 
 
   def filter_users_params
-    params.require(:user).permit(:group_id,:contacts)
+    params.permit(:group_id,:contacts)
   end 
 
 
