@@ -93,25 +93,14 @@ class GroupsController < ApplicationController
   end
 
   def save_user
-    phone = get_phone_number(group_user_params[:phone],group_user_params[:countryCode])
+    
+    @user = User.find(group_user_params[:id])
+    @group = Group.find(group_user_params[:group_id])
 
-    @user  = User.where(:phone => phone).first
-
-    # check if contact installed application
-    # check it is already member of the group
-    if @user != nil 
-        @group = Group.find(group_user_params[:group_id])
-        if Membership.where(:user => @user).where(:group => @group).first == nil
           @membership = Membership.new(:user => @user , :group => @group, :administrator => false , :status => 1)
           @membership.save
           redirect_to group_path(@group, format: :json)
-        else
-          render :json =>{:status => RESPONSE_ERROR_CONTACT_ALREADY_MEMBER ,:message => "Contact already member"}
-        end  
-   else
-        render :json =>{:status => RESPONSE_ERROR_CONTACT_NOT_FOUND ,:message => "Contact not found"}
-    
-    end    
+        
   end  
 
   def save_wallpaper
@@ -183,7 +172,7 @@ private
   end
 
   def group_user_params
-    params.permit(:phone,:countryCode,:group_id)
+    params.permit(:id,:group_id)
   end
 
   def wallpaper_params

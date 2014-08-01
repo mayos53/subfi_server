@@ -109,7 +109,7 @@ class UsersController < ApplicationController
     group_id = params[:group_id]
 
      users = User.includes([:memberships => :group])#.where.not(groups: {id: group_id}).references(:group)
-                                                        .where(:phone => contacts.map{|contact| get_phone_number(contact[:phone],contact[:countryCode])})
+                                                        .where(:phone => contacts.map{|contact| contact[:phone]})
 
      render :json => {:status => RESPONSE_OK ,:message => "OK",:contacts => users}                                                   
   end  
