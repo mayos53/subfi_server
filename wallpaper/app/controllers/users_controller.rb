@@ -106,9 +106,8 @@ class UsersController < ApplicationController
   #get list of contacts numbers and returns those who are app users;
   def get_contacts
     contacts = params[:contacts]
-    group_id = params[:group_id]
 
-     users = User.includes([:memberships => :group])#.where.not(groups: {id: group_id}).references(:group)
+     users = User#.includes([:memberships => :group])#.where.not(groups: {id: group_id}).references(:group)
                                                         .where(:phone => contacts.map{|contact| contact[:phone]})
 
      render :json => {:status => RESPONSE_OK ,:message => "OK",:contacts => users}                                                   
@@ -132,7 +131,7 @@ private
   end 
 
   def get_contacts_params
-    params.require(:user).permit(:group_id,:contacts)
+    params.require(:user).permit(:contacts)
   end 
 
 
