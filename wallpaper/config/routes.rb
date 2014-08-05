@@ -21,6 +21,8 @@ Blog::Application.routes.draw do
       post 'save_user'
       get  'add_user'
       post 'save_wallpaper'
+      get  'get_wallpapers' 
+
       get  'add_wallpaper'
       get  'send_notification' 
       get  'user/:id' => 'groups#groups_by_user'
