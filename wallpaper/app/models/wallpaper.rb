@@ -6,4 +6,6 @@ class Wallpaper < ActiveRecord::Base
     :path => ":rails_root/public/assets/wallpapers/:id/:style/:basename.:extension"
   	validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
 
+  	
+
 end

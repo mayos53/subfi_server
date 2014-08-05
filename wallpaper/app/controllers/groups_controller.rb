@@ -103,6 +103,13 @@ class GroupsController < ApplicationController
         
   end  
 
+  def get_wallpapers
+    wallpapers = Wallpaper.all(:conditions=>['group_id=?',wallpaper_params[:group_id]], :order => "created_time desc", :limit => wallpaper_params[:count])
+    wallpapers = wallpapers.map{|wallpaper| {id: wallpaper.id,path: get_wallpaper_path(wallpaper),created_time: wallpaper.created_time}}
+    render :json => {:wallpapers => wallpapers, :status => RESPONSE_OK, :message =>"ok"}
+
+  end  
+
   def save_wallpaper
      @wallpaper = Wallpaper.new(wallpaper_params)
      @wallpaper.save
@@ -186,4 +193,9 @@ private
    def user_params
     params.require(:user).permit(:user_id)
   end
+
+  def get_wallpapers_params
+    params.require(:wallpaper).permit(:group_id)
+  end
+
 end
