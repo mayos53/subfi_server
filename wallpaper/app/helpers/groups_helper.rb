@@ -3,7 +3,7 @@ module GroupsHelper
   def get_group_wallpaper_path(group,style) 
    logger.info "**group.wallpapers*** #{group.wallpapers.inspect}******"
    if group.wallpapers != nil and group.wallpapers.exists?
-      get_wallpaper_path(group.wallpapers.last)
+      get_wallpaper_path(group.wallpapers.last,style)
    else
     return nil
   end    
