@@ -26,7 +26,7 @@ def get_group_full_details(group)
  users = []
  group.memberships.zip(group.users).each do |membership, user|
   @full_user = user.to_h.merge({:administrator => membership.administrator, :status => membership.status});
-  @users << @full_user
+  users << @full_user
 end
 
 wallpapers = group.wallpapers.map{|wallpaper| 
@@ -35,7 +35,7 @@ wallpapers = group.wallpapers.map{|wallpaper|
 
   return { :id => group.id, :name => group.name,
     :wallpapers =>  wallpapers,
-    :users => @users}
+    :users => users}
 
 end  
 
