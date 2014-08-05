@@ -30,7 +30,7 @@ def get_group_full_details(group)
 end
 
 wallpapers = group.wallpapers.map{|wallpaper| 
-  {id: wallpaper.id,path: get_wallpaper_path(wallpaper),user: wallpaper.user,created_time: wallpaper.created_time}}
+  {id: wallpaper.id,path: get_wallpaper_path(wallpaper,:medium),user: wallpaper.user,created_time: wallpaper.created_time}}
 
 
   return { :id => group.id, :name => group.name,
