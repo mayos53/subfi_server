@@ -22,4 +22,21 @@ def add_host_prefix(url)
   URI.join(request.url, url).to_s
 end 
 
+def get_group_full_details(group)
+ users = []
+ group.memberships.zip(group.users).each do |membership, user|
+  @full_user = user.to_h.merge({:administrator => membership.administrator, :status => membership.status});
+  @users << @full_user
+end
+
+wallpapers = group.wallpapers.map{|wallpaper| 
+  {id: wallpaper.id,path: get_wallpaper_path(wallpaper),user: wallpaper.user,created_time: wallpaper.created_time}}
+
+
+  return { :id => group.id, :name => group.name,
+    :wallpapers =>  wallpapers,
+    :users => @users}
+
+end  
+
 end

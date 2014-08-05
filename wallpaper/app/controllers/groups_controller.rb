@@ -29,33 +29,10 @@ class GroupsController < ApplicationController
   end
 
   def show
-  	@group = Group.includes([:wallpapers,:memberships => :user]).find(params[:id])
-    
-    @users = []
-    
-    @group.memberships.zip(@group.users).each do |membership, user|
-       @full_user = user.to_h.merge({:administrator => membership.administrator, :status => membership.status});
-       @users << @full_user
-    end
+  	@group = Group.includes([:wallpapers => :user,:memberships => :user]).find(params[:id])
+    @group_result =  get_group_full_details(@group)
 
-    @group_result =  { :id => @group.id, :name => @group.name,:wallpaper => get_group_wallpaper_path(@group,:medium) , :users => @users}
-
-    
-    # @group = Group.includes([:memberships => :user]).find(params[:id])
-    
-    # @users = []
-    
-    # @group.memberships.zip(@group.users).each do |membership, user|
-    #     @full_user = {:user => user, :administrator => membership.administrator, :status => membership.status};
-    #     @users << @full_user
-    # end
-
-    # @group_result =  { :id => @group.id, :name => @group.name, :users => @users}
-   
-   
-    respond_to do |format|
-        format.html
-        format.json { render :json => {:group => @group_result , :status => RESPONSE_OK ,:message => "OK"}}
+    render :json => {:group => @group_result , :status => RESPONSE_OK ,:message => "OK"}
     end
 
   end
@@ -73,23 +50,16 @@ class GroupsController < ApplicationController
    def groups_by_user
      
       @groups_temp = Group.all(:include => {:memberships => :user}, :conditions => ['users.id=?', params[:id]])
-      @groups = Group.includes([:wallpapers,:memberships => :user]).where(:id => @groups_temp.map{|group| group.id})
+      @groups = Group.includes([:wallpapers=> :user,:memberships => :user]).where(:id => @groups_temp.map{|group| group.id})
 
       
       @group_result = []
       @groups.each do |group|
-          @users = []
-          group.memberships.zip(group.users).each do |membership, user|
-              @full_user = user.to_h.merge({:administrator => membership.administrator, :status => membership.status});
-              @users << @full_user
-          end
-          @group_result <<  { :id => group.id, :name => group.name,:wallpaper =>  get_group_wallpaper_path(group,:medium), :users => @users}
+          @group_result <<  get_group_full_details(group)
       end     
 
-       respond_to do |format|
-        format.html
-        format.json { render :json =>{:groups => @group_result , :status => RESPONSE_OK ,:message => "OK"}}
-        end
+       render :json =>{:groups => @group_result , :status => RESPONSE_OK ,:message => "OK"}
+        
   end
 
   def save_user
@@ -103,12 +73,7 @@ class GroupsController < ApplicationController
         
   end  
 
-  def get_wallpapers
-    wallpapers = Wallpaper.all(:conditions=>['group_id=?',wallpaper_params[:group_id]], :order => "created_time desc", :limit => wallpaper_params[:count])
-    wallpapers = wallpapers.map{|wallpaper| {id: wallpaper.id,path: get_wallpaper_path(wallpaper),created_time: wallpaper.created_time}}
-    render :json => {:wallpapers => wallpapers, :status => RESPONSE_OK, :message =>"ok"}
-
-  end  
+  
 
   def save_wallpaper
      @wallpaper = Wallpaper.new(wallpaper_params)
@@ -183,7 +148,7 @@ private
   end
 
   def wallpaper_params
-    params.require(:wallpaper).permit(:group_id,:photo)
+    params.require(:wallpaper).permit(:group_id,:photo,:user_id)
   end
 
   def notification_params
