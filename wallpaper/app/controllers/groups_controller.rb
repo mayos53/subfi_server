@@ -33,7 +33,7 @@ class GroupsController < ApplicationController
     @group_result =  get_group_full_details(@group)
 
     render :json => {:group => @group_result , :status => RESPONSE_OK ,:message => "OK"}
-    end
+    
 
   end
 
