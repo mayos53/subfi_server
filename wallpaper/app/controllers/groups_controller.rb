@@ -77,7 +77,7 @@ class GroupsController < ApplicationController
 
   def save_wallpaper
      @wallpaper = Wallpaper.new(wallpaper_params)
-     @wallpaper.update_attributes :timeSec => Time.now.to_i
+     @wallpaper.timeSec =  Time.now.to_i
      @wallpaper.save
      logger.info "***********************WALLPAPER**#{@wallpaper.inspect}*************************************"
      logger.info "***********************WALLPAPER*TIMESEC*#{Time.now.to_i}*************************************"
