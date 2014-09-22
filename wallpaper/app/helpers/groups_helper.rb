@@ -29,11 +29,22 @@ def get_group_full_details(group)
   users << @full_user
 end
 
+#sort
+
+image = nil
+if group.wallpapers != nil and group.wallpapers.exists?
+  group.wallpapers = group.wallpapers.sort_by{|e| -e[:timeSec]}
+  image = get_wallpaper_path(group.wallpapers.first,:medium)
+
+end  
+
+
+
 wallpapers = group.wallpapers.map{|wallpaper| 
-  {id: wallpaper.id,path: get_wallpaper_path(wallpaper,:medium),user: wallpaper.user,timeSec: wallpaper.timeSec}}
+  {id: wallpaper.id,path: get_wallpaper_path(wallpaper,:medium),user: wallpaper.user,timeSec: wallpaper.timeSec,title: wallpaper.title}}
 
 
-  return { :id => group.id, :name => group.name,
+  return { :id => group.id, :image => image, :name => group.name,
     :wallpapers =>  wallpapers,
     :users => users}
 
