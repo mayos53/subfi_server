@@ -87,7 +87,17 @@ class GroupsController < ApplicationController
 
   end  
 
+  def remove_member_from_group
+     Membership.where(:user_id => group_user_params[:id]).where(:group_id=> group_user_params[:group_id]).first.destroy
+     @group = Group.find(group_user_params[:group_id])
+     redirect_to group_path(@group, format: :json)
+  end
   
+  def remove_group_from_member
+     Membership.where(:user_id => group_user_params[:id]).where(:group_id=> group_user_params[:group_id]).first.destroy
+     @group = Group.find(group_user_params[:group_id])
+     redirect_to group_path(@group, format: :json)
+  end  
 
    def add_wallpaper
       @wallpaper = Wallpaper.new
