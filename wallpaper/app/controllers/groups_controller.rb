@@ -124,8 +124,8 @@ class GroupsController < ApplicationController
         :data => {
           :wallpaper_path => get_group_wallpaper_path(@group,nil),
           :title => @wallpaper.title,
-          :user => @wallpaper.user,
-          :groupName => @group.name
+          :user_id => @wallpaper.user.id,
+          :group_id => @group.id
         }
       }.to_json
 
