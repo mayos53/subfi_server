@@ -44,7 +44,7 @@ wallpapers = group.wallpapers.map{|wallpaper|
   {id: wallpaper.id,path: get_wallpaper_path(wallpaper,:medium),user: wallpaper.user,timeSec: wallpaper.timeSec,title: wallpaper.title}}
 
 
-  return { :id => group.id, :image => image, :name => group.name,
+  return { :id => group.id, :image => image,:name => group.name,
     :wallpapers =>  wallpapers,
     :users => users}
 
