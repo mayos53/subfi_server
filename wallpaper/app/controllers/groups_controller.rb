@@ -77,7 +77,7 @@ class GroupsController < ApplicationController
 
   def save_wallpaper
      @wallpaper = Wallpaper.new(wallpaper_params)
-     @wallpaper.update_attributes :time => Time.now.to_i
+     @wallpaper.update_attributes :timeSec => Time.now.to_i
      @wallpaper.save
      @group = Group.includes([:wallpapers,:memberships => :user]).find(wallpaper_params[:group_id])
      send_notification
