@@ -32,15 +32,16 @@ end
 #sort
 
 image = nil
+wallpapers = [];
 if group.wallpapers != nil and group.wallpapers.exists?
-  group.wallpapers = group.wallpapers.sort_by{|e| -e.timeSec}
+  wallpapers = group.wallpapers.sort_by{|e| -e.timeSec}
   image = get_wallpaper_path(group.wallpapers.first,:medium)
 
 end  
 
 
 
-wallpapers = group.wallpapers.map{|wallpaper| 
+wallpapers = wallpapers.map{|wallpaper| 
   {id: wallpaper.id,path: get_wallpaper_path(wallpaper,:medium),user: wallpaper.user,timeSec: wallpaper.timeSec,title: wallpaper.title}}
 
 
