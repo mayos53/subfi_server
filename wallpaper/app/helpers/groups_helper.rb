@@ -35,7 +35,7 @@ image = nil
 wallpapers = [];
 if group.wallpapers != nil and group.wallpapers.exists?
   wallpapers = group.wallpapers.sort_by{|e| -e.timeSec}
-  image = get_wallpaper_path(group.wallpapers.first,:medium)
+  image = get_wallpaper_path(wallpapers.first,:medium)
 
 end  
 
