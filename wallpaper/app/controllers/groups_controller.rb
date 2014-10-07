@@ -97,8 +97,8 @@ class GroupsController < ApplicationController
   
   def remove_group_from_member
      Membership.where(:user_id => group_user_params[:id]).where(:group_id=> group_user_params[:group_id]).first.destroy
-     @group = Group.find(group_user_params[:group_id])
-     redirect_to group_path(@group, format: :json)
+     redirect_to :action => 'groups_by_user' ,:id => group_user_params[:id],:format => 'json' and return
+     
   end  
 
    def add_wallpaper
