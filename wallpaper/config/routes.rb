@@ -24,6 +24,8 @@ Blog::Application.routes.draw do
       get  'get_wallpapers' 
       post  'remove_member_from_group' 
       post  'remove_group_from_member'
+      post  'change_group_status'
+
       get  'add_wallpaper'
       get  'send_notification' 
       get  'user/:id' => 'groups#groups_by_user'

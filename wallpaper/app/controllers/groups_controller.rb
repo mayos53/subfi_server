@@ -99,7 +99,16 @@ class GroupsController < ApplicationController
      Membership.where(:user_id => group_user_params[:id]).where(:group_id=> group_user_params[:group_id]).first.destroy
      redirect_to :action => 'groups_by_user' ,:id => group_user_params[:id],:format => 'json' and return
      
-  end  
+  end 
+
+  def change_group_status
+     membership = Membership.where(:user_id => group_status_params[:id]).where(:group_id=> group_status_params[:group_id])
+     membership.update_attributes :status => group_status_params[:status]
+     membership.save
+
+     redirect_to :action => 'groups_by_user' ,:id => group_status_params[:id],:format => 'json' and return
+     
+  end   
 
    def add_wallpaper
       @wallpaper = Wallpaper.new
@@ -177,6 +186,9 @@ private
 
   def get_wallpapers_params
     params.require(:wallpaper).permit(:group_id)
+  end
+  def group_status_params
+    params.permit(:id,:group_id,:status)
   end
 
 end

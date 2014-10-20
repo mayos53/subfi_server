@@ -1,34 +1,33 @@
-- remove group
+- disable group
 - remove contact
-- save image in thread
+- correct design for remove contact/group
+- fit picture in paint screen
 - correct picture sizes
 - Wallpaper doesn't fit screen
 
-
-
 - add Facebook
----- Take photo
+- sort groups
+- remove notification
+- handle permissions for actions
 - greater images for list items
-- handle permissions
-
-
-
-
-- limit number of wallpapers
-
-
+- broadcast for contact list change.No need to reload all contacts at each startup
 - recommend a friend
 - open from gallery
-
-
 - Transfer server
+- accents
 
+- progress bar
+
+- limit number of wallpapers
 - notification message containing user name  and group name
 - list of contacts with phone contact name
 - more than 1 notifications
 - no members in group (beside admin)
 - no wallpaper in group
 - date (different format if same day)
-- long texts
-
+- cut long texts
 - contact added twice
+
+---- Take photo
+---- remove group
+---- save image in thread
