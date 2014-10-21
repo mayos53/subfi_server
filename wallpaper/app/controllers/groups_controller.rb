@@ -102,7 +102,7 @@ class GroupsController < ApplicationController
   end 
 
   def change_group_status
-     membership = Membership.where(:user_id => group_status_params[:id]).where(:group_id=> group_status_params[:group_id])
+     membership = Membership.where(:user_id => group_status_params[:id]).where(:group_id=> group_status_params[:group_id]).first
      membership.update_attributes :status => group_status_params[:status]
      membership.save
 
