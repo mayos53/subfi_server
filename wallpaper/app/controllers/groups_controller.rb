@@ -121,7 +121,7 @@ class GroupsController < ApplicationController
     request = Net::HTTP::Post.new(uri.request_uri)
     
     registration_ids = []
-    @group.memberships.zip(group.users).each do |membership, user|
+    @group.memberships.zip(@group.users).each do |membership, user|
       if user.registrationId != nil and membership.status == 1
           registration_ids <<  user.registrationId
       end
