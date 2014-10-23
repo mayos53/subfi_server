@@ -1,21 +1,20 @@
-- disable group design
-- remove contact
+- design for disable group
+- Wallpaper doesn't fit screen
 - fit picture in paint screen
 - correct picture sizes
-- Wallpaper doesn't fit screen
 - add Facebook
 - sort groups
-
 - greater images for list items
 - broadcast for contact list change.No need to reload all contacts at each startup
 - recommend a friend
 - open from gallery
 - Transfer server
+- icons (in all sizes - launch icon first)
+
+
+
 - progress bar
 - accents
-
-
-
 - limit number of wallpapers
 - notification message containing user name  and group name
 - list of contacts with phone contact name
@@ -25,9 +24,10 @@
 - date (different format if same day)
 - cut long texts
 - contact added twice
-- check add group after erase it
+- check adding group after erasing it
+- correct error messages
 
-
+---- remove contact
 ---- Take photo
 ---- remove group
 ---- save image in thread
