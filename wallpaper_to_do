@@ -1,16 +1,11 @@
-- design for disable group
 - Wallpaper doesn't fit screen
-- fit picture in paint screen
-- correct picture sizes
 - add Facebook
 - sort groups
-- greater images for list items
-- broadcast for contact list change.No need to reload all contacts at each startup
 - recommend a friend
 - open from gallery
 - Transfer server
 - icons (in all sizes - launch icon first)
-
+- another folder to save pictures sent
 
 
 - progress bar
@@ -26,6 +21,9 @@
 - contact added twice
 - check adding group after erasing it
 - correct error messages
+- progress bar continue after failed
+- greater images for list items
+
 
 ---- remove contact
 ---- Take photo
@@ -33,3 +31,8 @@
 ---- save image in thread
 ---- handle permissions for actions
 ---- remove notification
+---- fit picture in paint screen
+---- broadcast for contact list change.No need to reload all contacts at each startup
+
+
+Oralie 0547653841

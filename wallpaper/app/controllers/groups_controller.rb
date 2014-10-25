@@ -56,7 +56,9 @@ class GroupsController < ApplicationController
       @group_result = []
       @groups.each do |group|
           @group_result <<  get_group_full_details(group)
-      end     
+      end 
+
+
 
        render :json =>{:groups => @group_result , :status => RESPONSE_OK ,:message => "OK"}
         
@@ -121,6 +123,8 @@ class GroupsController < ApplicationController
     request = Net::HTTP::Post.new(uri.request_uri)
     
     registration_ids = []
+    
+
     @group.memberships.zip(@group.users).each do |membership, user|
       if user.registrationId != nil and membership.status == 1
           registration_ids <<  user.registrationId
@@ -128,35 +132,34 @@ class GroupsController < ApplicationController
     end
 
   
+    if registration_ids.length > 0
 
+        request.body= {
+            :registration_ids =>  registration_ids,
+            :data => {
+              :wallpaper_path => get_group_wallpaper_path(@group,nil),
+              :title => @wallpaper.title,
+              :user_id => @wallpaper.user.id,
+              :group_id => @group.id
+            }
+          }.to_json
 
-    request.body= {
-        :registration_ids =>  registration_ids,
-        :data => {
-          :wallpaper_path => get_group_wallpaper_path(@group,nil),
-          :title => @wallpaper.title,
-          :user_id => @wallpaper.user.id,
-          :group_id => @group.id
-        }
-      }.to_json
+       
 
-    # request.body= {
-    #     :registration_ids => ["APA91bEkPaZ-9OgCsyiarZzWygfaBr-sjpTigILRsQZq1b3T-QmNxK1TwoWGxNCOoPsc1l0qECkaJQ-4hZ7sf2JGOUKJWSh2t9uB4Kg5CtzbvkOfkVzJqN0Nqb1sktgIJlQfDL6qw0ojIBuoRtnuBBa1bDHwqhXX49JFo8vJl2opwBUD7WgjVvg"],
-    #     :data => {
-    #       :toto => "tata"
-    #   }.to_json
+        request["Authorization"] = "key=AIzaSyDZlgujjp_pKOUftg3UXVTczyvf7ZHPR-Y"
+        request["Content-Type"] = "application/json"
+        response = http.request(request)
+        logger.info "**********#{response.body.inspect}*****"
+        response_parsed = JSON.parse(response.body)
 
-    request["Authorization"] = "key=AIzaSyDZlgujjp_pKOUftg3UXVTczyvf7ZHPR-Y"
-    request["Content-Type"] = "application/json"
-    response = http.request(request)
-    logger.info "**********#{response.body.inspect}*****"
-    response_parsed = JSON.parse(response.body)
-
-    if response_parsed["failure"] > 0
-        render :json => {:status => RESPONSE_ERROR, :message =>"error"}
-    else  
+        if response_parsed["failure"] > 0
+            render :json => {:status => RESPONSE_ERROR, :message =>"error"}
+        else  
+            redirect_to group_path(@group, format: :json)
+        end
+    else
         redirect_to group_path(@group, format: :json)
-    end
+    end    
     
   end
 

@@ -8,7 +8,7 @@ module GroupsHelper
     return nil
   end    
 end 
-
+  
 def get_wallpaper_path(wallpaper,style)
   if style != nil
    add_host_prefix(wallpaper.photo.url(style))
