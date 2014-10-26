@@ -141,7 +141,7 @@ class GroupsController < ApplicationController
               :user_id => user.id,
               :user_name => user.name,
               :group_id => group.id,
-              :group_name => group.name
+              :group_name => group.name,
               :recommender_name => recommender.name
 
             }
