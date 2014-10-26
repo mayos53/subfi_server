@@ -20,7 +20,7 @@
 - check adding group after erasing it
 - correct error messages
 - progress bar continue after failed
-- greater images for list items
+- cut image in server
 
 
 ---- remove contact
@@ -33,6 +33,6 @@
 ---- broadcast for contact list change.No need to reload all contacts at each startup
 ---- sort groups
 ---- open from gallery
-
+---- greater images for list items
 
 Oralie 0547653841

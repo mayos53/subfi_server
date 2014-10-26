@@ -115,6 +115,53 @@ class GroupsController < ApplicationController
    def add_wallpaper
       @wallpaper = Wallpaper.new
    end  
+
+  def recommend_user
+    group_id =  recommend_user_params[:group_id]
+    userId = recommend_user_params[:id]
+    recommenderId = recommend_user_params[:recommender_id]
+    
+    administratorId = Membership.where(:group_id => group_id).where(:administrator => true).first.user_id
+
+    administratorRegId = User.find(administratorId).registrationId
+
+    user = User.find(userId)
+
+    recommender = User.find(recommenderId)
+
+
+    uri = URI.parse("https://android.googleapis.com/gcm/send")
+    http = Net::HTTP.new(uri.host)
+    request = Net::HTTP::Post.new(uri.request_uri)
+
+     request.body= {
+            :registration_ids =>  [administratorRegId],
+            :data => {
+              :type    => "recommend",  
+              :user_id => user.id,
+              :user_name => user.name,
+              :group_id => group.id,
+              :group_name => group.name
+              :recommender_name => recommender.name
+
+            }
+          }.to_json
+
+       
+
+        request["Authorization"] = "key=AIzaSyDZlgujjp_pKOUftg3UXVTczyvf7ZHPR-Y"
+        request["Content-Type"] = "application/json"
+        response = http.request(request)
+        logger.info "**********#{response.body.inspect}*****"
+        response_parsed = JSON.parse(response.body)
+    
+         if response_parsed["failure"] > 0
+            render :json => {:status => RESPONSE_ERROR, :message =>"error"}
+         else  
+            render :json => {:status => RESPONSE_OK, :message => "ok"}
+         end
+
+  end
   
   def send_notification
 
@@ -175,6 +222,10 @@ private
 
   def group_user_params
     params.permit(:id,:group_id)
+  end
+
+  def recommend_user_params
+    params.permit(:id,:group_id,:recommender_id)
   end
 
   def wallpaper_params
