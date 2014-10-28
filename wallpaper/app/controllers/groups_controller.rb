@@ -126,8 +126,8 @@ class GroupsController < ApplicationController
     administratorRegId = User.find(administratorId).registrationId
 
     user = User.find(userId)
-
     recommender = User.find(recommenderId)
+    group = Group.find(group_id)
 
 
     uri = URI.parse("https://android.googleapis.com/gcm/send")
