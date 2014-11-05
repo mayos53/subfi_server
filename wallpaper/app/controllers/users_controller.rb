@@ -18,7 +18,7 @@ class UsersController < ApplicationController
      @user.code = random_number
      @user.save
      
-     # send_confirmation_code
+     send_confirmation_code
      respond_to do |format|
         format.html { redirect_to @user}
         format.json { render :json => {:id => @user.id,:name => @user.name,:phone => @user.phone, :countryCode => @user.countryCode, :status => RESPONSE_OK ,:message => "OK"}}
@@ -79,12 +79,19 @@ class UsersController < ApplicationController
   end  
   	
   def send_confirmation_code
-    user = "mayos53"
-    password ="HaVMZFHMEVDQTC"
-    api_id = "3490213"
+    
     number = @user.phone
+    email = "serrofortia@gmail.com"
+    apikey= "NUUWUZ3W8NAA39UPT6MA"
 
-    url_send = "http://api.clickatell.com/http/sendmsg?&api_id="+api_id+"&user="+user+"&password="+password+"&to="+number.to_s+"&text="+@user.code.to_s
+
+   url_send = "http://www.smsenvoi.com/getapi/sendsms/?email="+email+"&apikey="+apikey+"&message[type]=sms&message[subtype]=MONDE&message[content]="+@user.code.to_s+"&message[recipients]="+number.to_s
+    
+    ## clickatell  
+    # user = "mayos53"
+    # password ="HaVMZFHMEVDQTC"
+    # api_id = "3490213"
+    # url_send = "http://api.clickatell.com/http/sendmsg?&api_id="+api_id+"&user="+user+"&password="+password+"&to="+number.to_s+"&text="+@user.code.to_s
 
     logger.info url_send
 
