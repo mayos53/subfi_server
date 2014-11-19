@@ -30,13 +30,14 @@ class UsersController < ApplicationController
      phone = get_phone_number(user_params[:phone],user_params[:countryCode])
      @user = User.where(:phone => phone).first
      if @user != nil
-       @user.code = random_number
-       @user.save
-       
-       send_confirmation_code
-       respond_to do |format|
-          format.html { redirect_to @user}
-          format.json { render :json => {:id => @user.id,:name => @user.name,:phone => @user.phone, :countryCode => @user.countryCode, :status => RESPONSE_OK ,:message => "OK"}}
+         @user.code = random_number
+         @user.save
+         
+         send_confirmation_code
+         respond_to do |format|
+            format.html { redirect_to @user}
+            format.json { render :json => {:id => @user.id,:name => @user.name,:phone => @user.phone, :countryCode => @user.countryCode, :status => RESPONSE_OK ,:message => "OK"}}
+         end   
       else
          render :json => {:status =>  RESPONSE_ERROR_USER_NOT_FOUND ,:message => "User not found"}
           
