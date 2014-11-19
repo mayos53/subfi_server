@@ -5,6 +5,7 @@ Blog::Application.routes.draw do
     resources :users do
       collection do
         post 'register'
+        post 'login'
         post 'confirm_registration'
         post 'resend_code'
         post 'get_contacts'
