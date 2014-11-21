@@ -11,10 +11,10 @@ class GroupsController < ApplicationController
     
 
      #check if group exists
-     if Group.where(:name => group_params[:name]).first != nil
-        render :json => {:status => RESPONSE_ERROR_GROUP_ALREADY_EXISTS ,:message => "Error"}
-        return
-     end   
+     # if Group.where(:name => group_params[:name]).first != nil
+     #    render :json => {:status => RESPONSE_ERROR_GROUP_ALREADY_EXISTS ,:message => "Error"}
+     #    return
+     # end   
 
      @group = Group.new(:name=>group_params[:name])
      @group.save
