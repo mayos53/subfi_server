@@ -129,10 +129,15 @@ class GroupsController < ApplicationController
     recommender = User.find(recommenderId)
     group = Group.find(group_id)
 
+    @recommendation = Recommendation.new(:user => user , :group => group, :recommender_id: recommender.id, :recommender_name: recommender.name)
+    @recommendation.save 
+
 
     uri = URI.parse("https://android.googleapis.com/gcm/send")
     http = Net::HTTP.new(uri.host)
     request = Net::HTTP::Post.new(uri.request_uri)
+
+
 
      request.body= {
             :registration_ids =>  [administratorRegId],
@@ -162,6 +167,27 @@ class GroupsController < ApplicationController
          end
 
   end
+
+
+  def get_recommendations
+    user_id =  get_recommendation_params[:user_id]
+    recommmendations = Recommendation.includes([:groups,:users])where(:user_id => user_id)
+    
+    result = []
+
+    recommmendations.each do |recommmendation|
+      result << {:user_id => recommendation.user.id , :user_name => recommendation.user.name,
+                 :group_id => recommendation.group.id , :group_name => recommendation.group.name,
+                 :recommender_name => recommendation.recommender_name
+                  }
+    end
+    render :json =>{:recommendations => result , :status => RESPONSE_OK ,:message => "OK"}
+        
+
+  end  
+
+
+
   
   def send_notification
 
@@ -216,6 +242,11 @@ class GroupsController < ApplicationController
   	
 
 private
+
+  def get_recommendation_params
+    params.permit(:user_id)
+  end
+
   def group_params
     params.permit(:user_id,:name)
   end
