@@ -27,7 +27,7 @@ Blog::Application.routes.draw do
       post  'remove_group_from_member'
       post  'change_group_status'
       post  'recommend_user'
-
+      post   'get_recommendations'
 
       get  'add_wallpaper'
       get  'send_notification' 

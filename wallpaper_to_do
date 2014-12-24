@@ -1,20 +1,14 @@
 
-- ability to connect normally or FB
-- another folder to save pictures sent
-- Pour l'indicatif: options 00972, 972, +972
-- Enlever le champ mail lors de l'inscription...
-- le Pop up pour ajouter un nouveau groupe, il faut le remplacer par l'ecran qui est prévu pour ca.
-- Le titre Selectioner un contacte empiète sur le bouton Groupe(Back...)
-- Lors de l'affichage du nom d'un user: mettre la 1ere lettre en MAJ.
-- L'appli plante quand j'essaye d'uploader une photo que je viens de prendre depuis l'application, et non de la gallerie.
-- Si internet n'est pas dispo, afficher un pop up....
-- Dans le graphisme que menahem a fournit il y a un pop up deja dessine... tu peux mettre celui la pour remplacer tout les autres???
 
 
-- Ya encore d probleme au niveau du cadrage de la photo:
+
+
 - Ecran des invitations et recommendations
 - Menu defilant (invitations,recommendations, TOC)
 - icon of application for hdpi
+- ability to connect normally or FB
+- Ya encore d probleme au niveau du cadrage de la photo.
+
 
 
 
@@ -55,6 +49,16 @@
 ---- recommend a friend
 ---- Wallpaper doesn't fit screen
 ---- terms and conditions must be checked
+---- another folder to save pictures sent
+---- Pour l'indicatif: options 00972, 972, +972
+---- Enlever le champ mail lors de l'inscription...
+---- le Pop up pour ajouter un nouveau groupe, il faut le remplacer par l'ecran qui est prévu pour ca.
+---- Le titre Selectioner un contacte empiète sur le bouton Groupe(Back...)
+---- Lors de l'affichage du nom d'un user: mettre la 1ere lettre en MAJ.
+---- L'appli plante quand j'essaye d'uploader une photo que je viens de prendre depuis l'application, et non de la gallerie.
+---- Si internet n'est pas dispo, afficher un pop up....
+---- Dans le graphisme que menahem a fournit il y a un pop up deja dessine... tu peux mettre celui la pour remplacer tout les autres???
+
 
 
 Oralie 0547653841
