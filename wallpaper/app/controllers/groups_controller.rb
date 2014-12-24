@@ -128,6 +128,7 @@ class GroupsController < ApplicationController
     recommender = User.find(recommenderId)
     group = Group.find(group_id)
 
+
     @recommendation = Recommendation.new(:user => user , :group => group, :recommender_id => recommender.id, :recommender_name => recommender.name)
     @recommendation.save 
 
@@ -170,7 +171,7 @@ class GroupsController < ApplicationController
 
   def get_recommendations
     user_id =  get_recommendation_params[:user_id]
-    recommmendations = Recommendation.includes([:group,:user]).where(:user_id => user_id)
+    recommmendations = Recommendation.includes([:group,:user]).where(:administrator_id => user_id)
     
     result = []
 

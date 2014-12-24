@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140922085831) do
+ActiveRecord::Schema.define(version: 20141224174955) do
 
   create_table "groups", force: true do |t|
     t.string "name"
@@ -67,6 +67,18 @@ ActiveRecord::Schema.define(version: 20140922085831) do
 
   add_index "push_messages", ["delivered", "failed", "deliver_after"], name: "index_push_messages_on_delivered_and_failed_and_deliver_after"
 
+  create_table "recommendations", force: true do |t|
+    t.integer  "user_id"
+    t.string   "user_name"
+    t.integer  "group_id"
+    t.string   "group_name"
+    t.integer  "recommender_id"
+    t.string   "recommender_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "administrator_id"
+  end
+
   create_table "users", force: true do |t|
     t.string "name"
     t.text   "countryCode"
@@ -88,6 +100,7 @@ ActiveRecord::Schema.define(version: 20140922085831) do
     t.datetime "photo_updated_at"
     t.string   "user_id"
     t.integer  "timeSec"
+    t.string   "title"
   end
 
 end
