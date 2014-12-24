@@ -174,7 +174,7 @@ class GroupsController < ApplicationController
     
     result = []
 
-    recommmendations.each do |recommmendation|
+    recommmendations.each do |recommendation|
       result << {:user_id => recommendation.user.id , :user_name => recommendation.user.name,
                  :group_id => recommendation.group.id , :group_name => recommendation.group.name,
                  :recommender_name => recommendation.recommender_name
