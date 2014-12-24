@@ -170,7 +170,7 @@ class GroupsController < ApplicationController
 
   def get_recommendations
     user_id =  get_recommendation_params[:user_id]
-    recommmendations = Recommendation.includes([:groups,:users]).where(:user_id => user_id)
+    recommmendations = Recommendation.includes([:group,:user]).where(:user_id => user_id)
     
     result = []
 
