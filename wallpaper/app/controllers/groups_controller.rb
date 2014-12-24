@@ -31,8 +31,9 @@ class GroupsController < ApplicationController
   def show
   	@group = Group.includes([:wallpapers => :user,:memberships => :user]).find(params[:id])
     @group_result =  get_group_full_details(@group)
+    @recommendations = fetch_recommendations(@user.id)
 
-    render :json => {:group => @group_result , :status => RESPONSE_OK ,:message => "OK"}
+    render :json => {:group => @group_result ,:recommendations => @recommendations, :status => RESPONSE_OK ,:message => "OK"}
     
 
   end
@@ -171,22 +172,13 @@ class GroupsController < ApplicationController
 
   def get_recommendations
     user_id =  get_recommendation_params[:user_id]
-    recommmendations = Recommendation.includes([:group,:user]).where(:administrator_id => user_id)
-    
-    result = []
-
-    recommmendations.each do |recommendation|
-      result << {:user_id => recommendation.user.id , :user_name => recommendation.user.name,
-                 :group_id => recommendation.group.id , :group_name => recommendation.group.name,
-                 :recommender_name => recommendation.recommender_name
-                  }
-    end
+    result = fetch_recommendations(user_id)
     render :json =>{:recommendations => result , :status => RESPONSE_OK ,:message => "OK"}
         
 
   end  
 
-
+ 
 
   
   def send_notification
@@ -277,5 +269,24 @@ private
   def group_status_params
     params.permit(:id,:group_id,:status)
   end
+
+  def fetch_recommendations(user_id)
+
+    recommmendations = Recommendation.includes([:group,:user]).where(:administrator_id => user_id)
+    
+    result = []
+
+    recommmendations.each do |recommendation|
+      result << {:user_id => recommendation.user.id , :user_name => recommendation.user.name,
+                 :group_id => recommendation.group.id , :group_name => recommendation.group.name,
+                 :recommender_name => recommendation.recommender_name
+                  }
+    end
+    return result
+  end
+
+
+
+
 
 end
