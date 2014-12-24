@@ -82,7 +82,6 @@ class GroupsController < ApplicationController
      @wallpaper.timeSec =  Time.now.to_i
      @wallpaper.save
     
-
      @group = Group.includes([:wallpapers,:memberships => :user]).find(wallpaper_params[:group_id])
      send_notification
   end  
@@ -171,7 +170,7 @@ class GroupsController < ApplicationController
 
   def get_recommendations
     user_id =  get_recommendation_params[:user_id]
-    recommmendations = Recommendation.includes([:groups,:users])where(:user_id => user_id)
+    recommmendations = Recommendation.includes([:groups,:users]).where(:user_id => user_id)
     
     result = []
 
