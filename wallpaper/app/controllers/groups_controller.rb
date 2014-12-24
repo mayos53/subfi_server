@@ -128,7 +128,7 @@ class GroupsController < ApplicationController
     recommender = User.find(recommenderId)
     group = Group.find(group_id)
 
-    @recommendation = Recommendation.new(:user => user , :group => group, :recommender_id: recommender.id, :recommender_name: recommender.name)
+    @recommendation = Recommendation.new(:user => user , :group => group, :recommender_id => recommender.id, :recommender_name => recommender.name)
     @recommendation.save 
 
 
