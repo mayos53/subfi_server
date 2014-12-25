@@ -75,7 +75,7 @@ class GroupsController < ApplicationController
           
           # remove recommendation if exists
           recommendations = Recommendation.where(:group_id=> group_user_params[:group_id]).where(:user_id => group_user_params[:id])
-          if recommendations != nil and recommendations exists?
+          if recommendations != nil and recommendations.exists?
             recommendations.first.destroy
           end  
 
