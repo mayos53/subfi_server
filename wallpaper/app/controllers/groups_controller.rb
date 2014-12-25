@@ -72,7 +72,18 @@ class GroupsController < ApplicationController
 
           @membership = Membership.new(:user => @user , :group => @group, :administrator => false , :status => 1)
           @membership.save
+          
+          # remove recommendation if exists
+          recommendations = Recommendation.where(:group_id=> group_user_params[:group_id]).where(:user_id => group_user_params[:id])
+          if recommendations != nil and recommendations.length > 0
+            recommendations.first.destroy
+          end  
+
+          
+
+
           redirect_to group_path(@group, format: :json)
+
         
   end  
 
@@ -130,7 +141,7 @@ class GroupsController < ApplicationController
     group = Group.find(group_id)
 
 
-    @recommendation = Recommendation.new(:user => user , :group => group, :recommender_id => recommender.id, :recommender_name => recommender.name)
+    @recommendation = Recommendation.new(:user => user , :group => group, :recommender_id => recommender.id,:administrator_id => administratorId, :recommender_name => recommender.name)
     @recommendation.save 
 
 
