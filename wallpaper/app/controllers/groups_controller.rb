@@ -31,9 +31,8 @@ class GroupsController < ApplicationController
   def show
   	@group = Group.includes([:wallpapers => :user,:memberships => :user]).find(params[:id])
     @group_result =  get_group_full_details(@group)
-    @recommendations = fetch_recommendations(@user.id)
 
-    render :json => {:group => @group_result ,:recommendations => @recommendations, :status => RESPONSE_OK ,:message => "OK"}
+    render :json => {:group => @group_result , :status => RESPONSE_OK ,:message => "OK"}
     
 
   end
@@ -70,21 +69,22 @@ class GroupsController < ApplicationController
     @user = User.find(group_user_params[:id])
     @group = Group.find(group_user_params[:group_id])
 
-          @membership = Membership.new(:user => @user , :group => @group, :administrator => false , :status => 1)
-          @membership.save
+    @membership = Membership.new(:user => @user , :group => @group, :administrator => false , :status => 1)
+    @membership.save
           
-          # remove recommendation if exists
-          recommendations = Recommendation.where(:group_id=> group_user_params[:group_id]).where(:user_id => group_user_params[:id])
-          if recommendations != nil and recommendations.exists?
-            recommendations.first.destroy
-          end  
+    # remove recommendation if exists
+    recommendations = Recommendation.where(:group_id => group_user_params[:group_id]).where(:user_id => group_user_params[:id])
+    if recommendations != nil and recommendations.exists?
+        recommendations.first.destroy
+    end  
 
-          
+    # append recommendations
+    @group_result =  get_group_full_details(@group)
+    @group_result.merge({:recommendations => recommendations})
+
+    render :json => {:group => @group_result , :status => RESPONSE_OK ,:message => "OK"}
 
 
-          redirect_to group_path(@group, format: :json)
-
-        
   end  
 
   

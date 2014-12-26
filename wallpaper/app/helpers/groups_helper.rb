@@ -23,32 +23,32 @@ def add_host_prefix(url)
 end 
 
 def get_group_full_details(group)
- users = []
- group.memberships.zip(group.users).each do |membership, user|
-  @full_user = user.to_h.merge({:administrator => membership.administrator, :status => membership.status});
-  users << @full_user
-end
+   users = []
+   group.memberships.zip(group.users).each do |membership, user|
+    @full_user = user.to_h.merge({:administrator => membership.administrator, :status => membership.status});
+    users << @full_user
+  end
 
-#sort
+  #sort
 
-image = nil
-time = nil
-wallpapers = [];
-if group.wallpapers != nil and group.wallpapers.exists?
-  wallpapers = group.wallpapers.sort_by{|e| -e.timeSec}
-  image = get_wallpaper_path(wallpapers.first,:medium)
-  time = wallpapers.first.timeSec 
-end  
-
-
-
-wallpapers = wallpapers.map{|wallpaper| 
-  {id: wallpaper.id,path: get_wallpaper_path(wallpaper,:medium),user: wallpaper.user,timeSec: wallpaper.timeSec,title: wallpaper.title}}
+  image = nil
+  time = nil
+  wallpapers = [];
+  if group.wallpapers != nil and group.wallpapers.exists?
+    wallpapers = group.wallpapers.sort_by{|e| -e.timeSec}
+    image = get_wallpaper_path(wallpapers.first,:medium)
+    time = wallpapers.first.timeSec 
+  end  
 
 
-  return { :id => group.id, :image => image,:time => time, :name => group.name,
-    :wallpapers =>  wallpapers,
-    :users => users}
+
+  wallpapers = wallpapers.map{|wallpaper| 
+    {id: wallpaper.id,path: get_wallpaper_path(wallpaper,:medium),user: wallpaper.user,timeSec: wallpaper.timeSec,title: wallpaper.title}}
+
+
+    return { :id => group.id, :image => image,:time => time, :name => group.name,
+      :wallpapers =>  wallpapers,
+      :users => users}
 
 end  
 
