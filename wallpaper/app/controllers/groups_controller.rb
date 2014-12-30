@@ -373,7 +373,7 @@ private
 
   def fetch_invitations(user_id)
 
-    invitations = Recommendation.includes([:group,:user]).where(:user_id => user_id)
+    invitations = Invitation.includes([:group,:user]).where(:user_id => user_id)
     
     result = []
 
