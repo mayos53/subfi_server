@@ -31,6 +31,19 @@ def get_group_full_details(group)
 
   #sort
 
+  image_time = get_group_image_and_time(group)
+ 
+  wallpapers = group.wallpapers.map{|wallpaper| 
+    {id: wallpaper.id,path: get_wallpaper_path(wallpaper,:medium),user: wallpaper.user,timeSec: wallpaper.timeSec,title: wallpaper.title}}
+
+
+    return { :id => group.id, :name => group.name,
+      :wallpapers =>  wallpapers,
+      :users => users}.merge(image_time)
+
+end 
+
+def get_group_image_and_time(group)
   image = nil
   time = nil
   wallpapers = [];
@@ -39,16 +52,7 @@ def get_group_full_details(group)
     image = get_wallpaper_path(wallpapers.first,:medium)
     time = wallpapers.first.timeSec 
   end  
-
-
-
-  wallpapers = wallpapers.map{|wallpaper| 
-    {id: wallpaper.id,path: get_wallpaper_path(wallpaper,:medium),user: wallpaper.user,timeSec: wallpaper.timeSec,title: wallpaper.title}}
-
-
-    return { :id => group.id, :image => image,:time => time, :name => group.name,
-      :wallpapers =>  wallpapers,
-      :users => users}
+  return {:image => image, :time => time}
 
 end  
 

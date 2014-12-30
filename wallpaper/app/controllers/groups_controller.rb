@@ -78,9 +78,15 @@ class GroupsController < ApplicationController
         recommendations.first.destroy
     end  
 
+    # remove invitation if exists
+    invitations = Invitation.where(:group_id => group_user_params[:group_id]).where(:user_id => group_user_params[:id])
+    if invitations != nil and invitations.exists?
+        invitations.first.destroy
+    end  
+
     # append recommendations
     @group_result =  get_group_full_details(@group)
-    @group_result.merge({:recommendations => recommendations})
+    @group_result = @group_result.merge({:recommendations => recommendations, :invitations => invitations})
 
     render :json => {:group => @group_result , :status => RESPONSE_OK ,:message => "OK"}
 
@@ -180,13 +186,71 @@ class GroupsController < ApplicationController
 
   end
 
+  def invite_user
+    group_id =  invite_user_params[:group_id]
+    userId = invite_user_params[:id]
+    
+    administratorId = User.where(:group_id => group_id).where(:administrator => true).first.user_id
+
+    userRegId = User.find(userId).registrationId
+
+    administrator = User.find(administratorId)
+    group = Group.find(group_id)
+
+
+    @invitation = Invitation.new(:user => administrator , :group => group, :user_id => userId)
+    @invitation.save 
+
+
+    uri = URI.parse("https://android.googleapis.com/gcm/send")
+    http = Net::HTTP.new(uri.host)
+    request = Net::HTTP::Post.new(uri.request_uri)
+
+
+
+     request.body= {
+            :registration_ids =>  [userRegId],
+            :data => {
+              :type    => "invite",  
+              :administrator_name => administrator.name,
+              :group_name => group.name
+
+            }
+          }.to_json
+
+       
+
+        request["Authorization"] = "key=AIzaSyDZlgujjp_pKOUftg3UXVTczyvf7ZHPR-Y"
+        request["Content-Type"] = "application/json"
+        response = http.request(request)
+        logger.info "**********#{response.body.inspect}*****"
+        response_parsed = JSON.parse(response.body)
+    
+         if response_parsed["failure"] > 0
+            render :json => {:status => RESPONSE_ERROR, :message =>"error"}
+         else  
+            render :json => {:status => RESPONSE_OK, :message => "ok"}
+         end
+
+  end
+
+
 
   def get_recommendations
     user_id =  get_recommendation_params[:user_id]
-    result2 = fetch_recommendations(user_id)
-    logger.info "********************************************************get_recommendations**#{result2.inspect}*************************************"
+    result = fetch_recommendations(user_id)
 
-    render :json =>{:recommendations => result2 , :status => RESPONSE_OK ,:message => "OK"}
+    
+
+    render :json => {:recommendations => result , :status => RESPONSE_OK ,:message => "OK"}
+        
+
+  end  
+
+  def get_invitations
+    user_id =  get_invitation_params[:user_id]
+    result = fetch_invitations(user_id)
+    render :json => {:invitations => result , :status => RESPONSE_OK ,:message => "OK"}
         
 
   end  
@@ -248,6 +312,10 @@ class GroupsController < ApplicationController
 
 private
 
+   def get_invitation_params
+    params.permit(:user_id)
+  end
+
   def get_recommendation_params
     params.permit(:user_id)
   end
@@ -262,6 +330,10 @@ private
 
   def recommend_user_params
     params.permit(:id,:group_id,:recommender_id)
+  end
+
+  def invite_user_params
+    params.permit(:administrator_id,:group_id,:user_id)
   end
 
   def wallpaper_params
@@ -290,10 +362,26 @@ private
     result = []
 
     recommmendations.each do |recommendation|
+      group_image_time = get_group_image_and_time(recommendation.group)
       result << {:user_id => recommendation.user.id , :user_name => recommendation.user.name,
                  :group_id => recommendation.group.id , :group_name => recommendation.group.name,
                  :recommender_name => recommendation.recommender_name
-                  }
+                  }.merge(group_image_time)
+    end
+    return result
+  end
+
+  def fetch_invitations(user_id)
+
+    invitations = Recommendation.includes([:group,:user]).where(:user_id => user_id)
+    
+    result = []
+
+    invitations.each do |invitation|
+      group_image_time = get_group_image_and_time(invitation.group)
+      result << {:administrator_id => invitation.user.id , :administrator_name => invitation.user.name,
+                 :group_id => invitation.group.id , :group_name => invitation.group.name
+                  }.merge(group_image_time)
     end
     return result
   end
