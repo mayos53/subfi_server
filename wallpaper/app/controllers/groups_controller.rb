@@ -188,7 +188,7 @@ class GroupsController < ApplicationController
 
   def invite_user
     group_id =  invite_user_params[:group_id]
-    userId = invite_user_params[:id]
+    userId = invite_user_params[:user_id]
     
     administratorId = invite_user_params[:administrator_id]
 
