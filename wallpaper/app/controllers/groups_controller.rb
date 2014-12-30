@@ -183,10 +183,10 @@ class GroupsController < ApplicationController
 
   def get_recommendations
     user_id =  get_recommendation_params[:user_id]
-    result = fetch_recommendations(user_id)
-    logger.info "********************************************************get_recommendations**#{result.inspect}*************************************"
+    result2 = fetch_recommendations(user_id)
+    logger.info "********************************************************get_recommendations**#{result2.inspect}*************************************"
 
-    render :json =>{:recommendations => result , :status => RESPONSE_OK ,:message => "OK"}
+    render :json =>{:recommendations => result2 , :status => RESPONSE_OK ,:message => "OK"}
         
 
   end  
