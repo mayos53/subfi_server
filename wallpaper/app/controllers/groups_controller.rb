@@ -190,7 +190,7 @@ class GroupsController < ApplicationController
     group_id =  invite_user_params[:group_id]
     userId = invite_user_params[:id]
     
-    administratorId = User.where(:group_id => group_id).where(:administrator => true).first.user_id
+    administratorId = invite_user_params[:administrator_id]
 
     userRegId = User.find(userId).registrationId
 
