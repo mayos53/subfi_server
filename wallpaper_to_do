@@ -3,16 +3,13 @@
 
 
 
-- Ecran des invitations et recommendations
-- Menu defilant (invitations,recommendations, TOC)
-- icon of application for hdpi
+
 - ability to connect normally or FB
 - Ya encore d probleme au niveau du cadrage de la photo.
-- icons pour delete and desactive
 - 2 recommendations pour la meme personne
 
 - alert if long big text - buttons are going to bottom and there is no margin at sides
-   
+- error si le contact est ajoute apres que l'application est installe   
 
 
 
@@ -36,8 +33,10 @@
 - correct error messages
 - cut image in server before getting it
 
-
-
+- Ecran des invitations et recommendations
+- Menu defilant (invitations,recommendations, TOC)
+- icon of application for hdpi
+- icons pour delete and desactive
 ---- remove contact
 ---- Take photo
 ---- remove group
