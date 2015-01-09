@@ -132,11 +132,13 @@ class UsersController < ApplicationController
   #get list of contacts numbers and returns those who are app users;
   def get_contacts
     contacts = params[:contacts]
+    users = []
+    if contacts != nil and contacts.exists?
+       users = User#.includes([:memberships => :group])#.where.not(groups: {id: group_id}).references(:group)
+                                                          .where(:phone => contacts.map{|contact| contact[:phone]})
+    end
+    render :json => {:status => RESPONSE_OK ,:message => "OK",:contacts => users}   
 
-     users = User#.includes([:memberships => :group])#.where.not(groups: {id: group_id}).references(:group)
-                                                        .where(:phone => contacts.map{|contact| contact[:phone]})
-
-     render :json => {:status => RESPONSE_OK ,:message => "OK",:contacts => users}                                                   
   end  
 
 
