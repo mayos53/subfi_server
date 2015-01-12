@@ -103,8 +103,8 @@ class UsersController < ApplicationController
     email = "serrofortia@gmail.com"
     apikey= "NUUWUZ3W8NAA39UPT6MA"
 
-
-   url_send = "http://www.smsenvoi.com/getapi/sendsms/?email="+email+"&apikey="+apikey+"&message[type]=sms&message[subtype]=PREMIUM&message[content]="+@user.code.to_s+"&message[recipients]="+number.to_s
+    message = "Subfi : votre code est : "+@user.code.to_s
+   url_send = "http://www.smsenvoi.com/getapi/sendsms/?email="+email+"&apikey="+apikey+"&message[type]=sms&message[subtype]=PREMIUM&message[content]="+message+"&message[recipients]="+number.to_s
     
     ## clickatell  
     # user = "mayos53"
