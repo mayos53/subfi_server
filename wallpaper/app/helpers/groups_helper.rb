@@ -31,14 +31,17 @@ def get_group_full_details(group)
 
   image_time = get_group_image_and_time(group)
 
-  #sort
+  wallpapers = []
+
+ #sort
   if group.wallpapers != nil and group.wallpapers.exists?
      wallpapers = group.wallpapers.sort_by{|e| -e.timeSec}
-  end   
+  end 
 
- 
-  wallpapers = group.wallpapers.map{|wallpaper| 
+  wallpapers = wallpapers.map{|wallpaper| 
     {id: wallpaper.id,path: get_wallpaper_path(wallpaper,:medium),user: wallpaper.user,timeSec: wallpaper.timeSec,title: wallpaper.title}}
+  
+
 
 
     return { :id => group.id, :name => group.name,
