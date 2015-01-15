@@ -9,8 +9,9 @@
 - 2 recommendations pour la meme personne
 
 - alert if long big text - buttons are going to bottom and there is no margin at sides
-- error si le contact est ajoute apres que l'application est installe   
-
+- problem si le contact est ajoute apres que l'application est installe   
+- error toutes les invitations sont effacees lorsque la personne est ajoutee
+ 
 
 
 

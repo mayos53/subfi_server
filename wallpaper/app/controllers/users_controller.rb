@@ -18,7 +18,7 @@ class UsersController < ApplicationController
      @user.code = random_number
      @user.save
      
-     send_confirmation_code
+     #send_confirmation_code
      respond_to do |format|
         format.html { redirect_to @user}
         format.json { render :json => {:id => @user.id,:name => @user.name,:phone => @user.phone, :countryCode => @user.countryCode, :status => RESPONSE_OK ,:message => "OK"}}
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
          @user.code = random_number
          @user.save
          
-         send_confirmation_code
+         #send_confirmation_code
          respond_to do |format|
             format.html { redirect_to @user}
             format.json { render :json => {:id => @user.id,:name => @user.name,:phone => @user.phone, :countryCode => @user.countryCode, :status => RESPONSE_OK ,:message => "OK"}}
@@ -133,7 +133,7 @@ class UsersController < ApplicationController
   def get_contacts
     contacts = params[:contacts]
     users = []
-    if contacts != nil and contacts.exists?
+    if contacts != nil and contacts.length > 0
        users = User#.includes([:memberships => :group])#.where.not(groups: {id: group_id}).references(:group)
                                                           .where(:phone => contacts.map{|contact| contact[:phone]})
     end
