@@ -254,8 +254,11 @@ class GroupsController < ApplicationController
 
  def remove_recommendation
     id =  remove_recommendation_params[:id]
+    user_id =  get_recommendation_params[:user_id]
     Recommendation.find(id).remove
-    render :json => {:status => RESPONSE_OK ,:message => "OK"}
+    result = fetch_recommendations(user_id)
+
+    render :json => {:recommendations => result ,:status => RESPONSE_OK ,:message => "OK"}
         
 
   end  
@@ -318,7 +321,7 @@ class GroupsController < ApplicationController
 private
 
   def remove_recommendation_params
-    params.permit(:id)
+    params.permit(:id,:user_id)
   end
    def get_invitation_params
     params.permit(:user_id)
