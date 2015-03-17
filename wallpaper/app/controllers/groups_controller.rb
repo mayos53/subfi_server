@@ -239,9 +239,6 @@ class GroupsController < ApplicationController
   def get_recommendations
     user_id =  get_recommendation_params[:user_id]
     result = fetch_recommendations(user_id)
-
-    
-
     render :json => {:recommendations => result , :status => RESPONSE_OK ,:message => "OK"}
         
 
@@ -251,6 +248,14 @@ class GroupsController < ApplicationController
     user_id =  get_invitation_params[:user_id]
     result = fetch_invitations(user_id)
     render :json => {:invitations => result , :status => RESPONSE_OK ,:message => "OK"}
+        
+
+  end  
+
+ def remove_recommendation
+    id =  remove_recommendation_params[:id]
+    Recommendation.find(id).remove
+    render :json => {:status => RESPONSE_OK ,:message => "OK"}
         
 
   end  
@@ -312,6 +317,9 @@ class GroupsController < ApplicationController
 
 private
 
+  def remove_recommendation_params
+    params.permit(:id)
+  end
    def get_invitation_params
     params.permit(:user_id)
   end
@@ -363,13 +371,15 @@ private
 
     recommmendations.each do |recommendation|
       group_image_time = get_group_image_and_time(recommendation.group)
-      result << {:user_id => recommendation.user.id , :user_name => recommendation.user.name,
+      result << {:id => recommendation.id, :user_id => recommendation.user.id , :user_name => recommendation.user.name,
                  :group_id => recommendation.group.id , :group_name => recommendation.group.name,
                  :recommender_name => recommendation.recommender_name
                   }.merge(group_image_time)
     end
     return result
   end
+
+
 
   def fetch_invitations(user_id)
 

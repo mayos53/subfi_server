@@ -30,6 +30,7 @@ Blog::Application.routes.draw do
       post  'get_recommendations'
       post  'invite_user'
       post  'get_invitations'
+      post  'remove_recommendation'
 
       get  'add_wallpaper'
       get  'send_notification' 

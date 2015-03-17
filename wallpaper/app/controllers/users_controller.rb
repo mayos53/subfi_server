@@ -136,6 +136,8 @@ class UsersController < ApplicationController
     if contacts != nil and contacts.length > 0
        users = User#.includes([:memberships => :group])#.where.not(groups: {id: group_id}).references(:group)
                                                           .where(:phone => contacts.map{|contact| contact[:phone]})
+                                                          
+                                                          
     end
     logger.info "ok"
     render :json => {:status => RESPONSE_OK ,:message => "OK",:contacts => users}   

@@ -5,8 +5,6 @@
 
 
 - ability to connect normally or FB
-- Ya encore d probleme au niveau du cadrage de la photo.
-- 2 recommendations pour la meme personne
 
 - alert if long big text - buttons are going to bottom and there is no margin at sides
 - problem si le contact est ajoute apres que l'application est installe   
@@ -33,6 +31,7 @@
 - display messages error
 - correct error messages
 - cut image in server before getting it
+
 
 - Ecran des invitations et recommendations
 - Menu defilant (invitations,recommendations, TOC)
