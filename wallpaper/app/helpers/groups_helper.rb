@@ -57,6 +57,8 @@ def get_group_image_and_time(group)
     image = get_wallpaper_path(group.wallpapers.last,:medium)
     time = group.wallpapers.last.timeSec 
   end  
+   logger.info "********************************************************image **#{image}*************************************"
+
   return {:image => image, :time => time}
 
 end  
