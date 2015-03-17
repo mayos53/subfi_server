@@ -255,7 +255,7 @@ class GroupsController < ApplicationController
  def remove_recommendation
     id =  remove_recommendation_params[:id]
     user_id =  get_recommendation_params[:user_id]
-    Recommendation.find(id).remove
+    Recommendation.find(id).destroy
     result = fetch_recommendations(user_id)
 
     render :json => {:recommendations => result ,:status => RESPONSE_OK ,:message => "OK"}
