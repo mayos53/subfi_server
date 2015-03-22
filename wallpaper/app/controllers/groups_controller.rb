@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
   end
 
   def show
-  	@group = Group.includes([:wallpapers => :user,:memberships => :user]).find(params[:id])
+  	@group = Group.includes([:wallpapers => :user,:memberships => :user,:recommendations]).find(params[:id])
     @group_result =  get_group_full_details(@group)
 
     render :json => {:group => @group_result , :status => RESPONSE_OK ,:message => "OK"}
@@ -50,7 +50,7 @@ class GroupsController < ApplicationController
    def groups_by_user
      
       @groups_temp = Group.all(:include => {:memberships => :user}, :conditions => ['users.id=?', params[:id]])
-      @groups = Group.includes([:wallpapers=> :user,:memberships => :user]).where(:id => @groups_temp.map{|group| group.id})
+      @groups = Group.includes([:wallpapers=> :user,:memberships => :user,:recommendations]).where(:id => @groups_temp.map{|group| group.id})
 
       
       @group_result = []
@@ -67,7 +67,7 @@ class GroupsController < ApplicationController
   def save_user
     
     @user = User.find(group_user_params[:id])
-    @group = Group.find(group_user_params[:group_id])
+    @group = Group.includes(:recommendations).find(group_user_params[:group_id])
 
     @membership = Membership.new(:user => @user , :group => @group, :administrator => false , :status => 1)
     @membership.save

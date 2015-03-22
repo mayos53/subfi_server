@@ -29,6 +29,12 @@ def get_group_full_details(group)
     users << @full_user
   end
 
+  group.recommendations.each do |recommendation|
+      recommended << User.find(recommendation.user_id)
+      recommended = recommended.to_h.merge({:status => -1})
+      users << recommended
+  end  
+  
   image_time = get_group_image_and_time(group)
 
   wallpapers = []
@@ -46,7 +52,8 @@ def get_group_full_details(group)
 
     return { :id => group.id, :name => group.name,
       :wallpapers =>  wallpapers,
-      :users => users}.merge(image_time)
+      :users => users
+      }.merge(image_time)
 
 end 
 
@@ -57,7 +64,7 @@ def get_group_image_and_time(group)
     image = get_wallpaper_path(group.wallpapers.last,:medium)
     time = group.wallpapers.last.timeSec 
   end  
-   logger.info "********************************************************image **#{image}*************************************"
+   logger.info "********************************************************image **#{image.inspect}*************************************"
 
   return {:image => image, :time => time}
 
