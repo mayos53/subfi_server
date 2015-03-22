@@ -30,7 +30,7 @@ def get_group_full_details(group)
   end
 
   group.recommendations.each do |recommendation|
-      recommended << User.find(recommendation.user_id)
+      recommended = User.find(recommendation.user_id)
       recommended = recommended.to_h.merge({:status => -1})
       users << recommended
   end  
