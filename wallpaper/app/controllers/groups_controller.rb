@@ -426,9 +426,9 @@ private
   end
 
  def addEvent(user_id,group_id,event_type)
-    event =  Event.where(:user_id => user_id, :group_id => group_id, :event_type => event_type).first
+    event =  Event.where(:user_id => user_id, :group_id => group_id, :type => event_type).first
     if event == nil
-       event = Event.new(:user_id => user_id, :group_id => group_id, :event_type => event_type)
+       event = Event.new(:user_id => user_id, :group_id => group_id, :type => event_type)
        event.time =  Time.now.to_i
        event.save
     end
