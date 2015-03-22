@@ -34,6 +34,11 @@ def get_group_full_details(group)
       recommended = recommended.to_h.merge({:status => -1})
       users << recommended
   end  
+
+  events = []
+  group.events.each do |event|
+      events << {:user_id => event.user.id, :user_name => event.user.name, :type => event.type, :time => event.time}
+  end  
   
   image_time = get_group_image_and_time(group)
 
@@ -52,7 +57,8 @@ def get_group_full_details(group)
 
     return { :id => group.id, :name => group.name,
       :wallpapers =>  wallpapers,
-      :users => users
+      :users => users,
+      :events => events
       }.merge(image_time)
 
 end 

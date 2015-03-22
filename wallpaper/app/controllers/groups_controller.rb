@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
   end
 
   def show
-  	@group = Group.includes([{:wallpapers => :user},{:memberships => :user},:recommendations]).find(params[:id])
+  	@group = Group.includes([{:wallpapers => :user},{:memberships => :user},:recommendations,{:events => :user}]).find(params[:id])
     @group_result =  get_group_full_details(@group)
 
     render :json => {:group => @group_result , :status => RESPONSE_OK ,:message => "OK"}
@@ -50,7 +50,7 @@ class GroupsController < ApplicationController
    def groups_by_user
      
       @groups_temp = Group.all(:include => {:memberships => :user}, :conditions => ['users.id=?', params[:id]])
-      @groups = Group.includes([{:wallpapers=> :user},{:memberships => :user},:recommendations]).where(:id => @groups_temp.map{|group| group.id})
+      @groups = Group.includes([{:wallpapers=> :user},{:memberships => :user},:recommendations,{:events => :user}]).where(:id => @groups_temp.map{|group| group.id})
 
       
       @group_result = []
@@ -67,7 +67,7 @@ class GroupsController < ApplicationController
   def save_user
     
     @user = User.find(group_user_params[:id])
-    @group = Group.includes(:recommendations).find(group_user_params[:group_id])
+    @group = Group.includes([:recommendations,:events]).find(group_user_params[:group_id])
 
     @membership = Membership.new(:user => @user , :group => @group, :administrator => false , :status => 1)
     @membership.save
@@ -85,7 +85,7 @@ class GroupsController < ApplicationController
     end  
 
     # append recommendations
-    @group = Group.includes(:recommendations).find(group_user_params[:group_id])
+    @group = Group.includes([:recommendations,{:events => :user}]).find(group_user_params[:group_id])
 
     @group_result =  get_group_full_details(@group)
     @group_result = @group_result.merge({:recommendations => recommendations, :invitations => invitations})
@@ -111,14 +111,38 @@ class GroupsController < ApplicationController
   end  
 
   def remove_member_from_group
-     Membership.where(:user_id => group_user_params[:id]).where(:group_id=> group_user_params[:group_id]).first.destroy
-     @group = Group.find(group_user_params[:group_id])
+     
+     user_id = group_user_params[:id]
+     group_id = group_user_params[:group_id]
+
+     Membership.where(:user_id => user_id).where(:group_id => group_id).first.destroy
+     @group = Group.find(group_id)
+
+     addEvent(user_id , group_id, EVENT_TYPE_LEAVE_GROUP) 
+
      redirect_to group_path(@group, format: :json)
   end
   
   def remove_group_from_member
-     Membership.where(:user_id => group_user_params[:id]).where(:group_id=> group_user_params[:group_id]).first.destroy
-     redirect_to :action => 'groups_by_user' ,:id => group_user_params[:id],:format => 'json' and return
+     user_id = group_user_params[:id]
+     group_id = group_user_params[:group_id]
+
+     membership =  Membership.where(:user_id => user_id).where(:group_id=> group_id).first
+     admin =  membership.administrator 
+     
+     membership.destroy
+
+     # design another admin
+     membership = Membership.where(:group_id => group_id).first
+     if membership != nil and admin
+        membership.admin = true
+        membership.save
+     end 
+
+     addEvent(user_id , group_id, EVENT_TYPE_LEAVE_GROUP) 
+
+
+     redirect_to :action => 'groups_by_user' ,:id => user_id,:format => 'json' and return
      
   end 
 
@@ -400,6 +424,15 @@ private
     end
     return result
   end
+
+ def addEvent(user_id,group_id,event_type)
+    event =  Event.where(:user_id => user_id, :group_id => group_id, :event_type => event_type).first
+    if event == nil
+       event = Event.new(:user_id => user_id, :group_id => group_id, :event_type => event_type)
+       event.time =  Time.now.to_i
+       event.save
+    end
+ end 
 
 
 
