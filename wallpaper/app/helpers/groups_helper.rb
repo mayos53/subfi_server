@@ -37,7 +37,7 @@ def get_group_full_details(group)
 
   events = []
   group.events.each do |event|
-      events << {:user_id => event.user.id, :user_name => event.user.name, :type => event.type, :time => event.time}
+      events << {:user_id => event.user.id, :user_name => event.user.name, :type => event.event_type, :time => event.time}
   end  
   
   image_time = get_group_image_and_time(group)
