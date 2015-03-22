@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 	has_many :memberships
 	has_many :groups , :through => :memberships
+  has_many :recommendations
 
 
 	# Exclude created_at info from json output.
