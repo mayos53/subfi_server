@@ -104,7 +104,7 @@ class UsersController < ApplicationController
     apikey= "NUUWUZ3W8NAA39UPT6MA"
 
     message = URI::encode("Votre code Subfi est "+@user.code.to_s)
-   url_send = "http://www.smsenvoi.com/getapi/sendsms/?email="+email+"&apikey="+apikey+"&message[type]=sms&message[subtype]=PREMIUM&message[content]="+message+"&message[recipients]="+number.to_s
+   url_send = "http://www.smsenvoi.com/getapi/sendsms/?email="+email+"&apikey="+apikey+"&message[type]=sms&message[subtype]=MONDE&message[content]="+message+"&message[recipients]="+number.to_s
     
     ## clickatell  
     # user = "mayos53"
