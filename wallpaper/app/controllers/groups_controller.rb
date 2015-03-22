@@ -135,7 +135,7 @@ class GroupsController < ApplicationController
      # design another admin
      membership = Membership.where(:group_id => group_id).first
      if membership != nil and admin
-        membership.admin = true
+        membership.administrator = true
         membership.save
      end 
 
