@@ -85,6 +85,8 @@ class GroupsController < ApplicationController
     end  
 
     # append recommendations
+    @group = Group.includes(:recommendations).find(group_user_params[:group_id])
+
     @group_result =  get_group_full_details(@group)
     @group_result = @group_result.merge({:recommendations => recommendations, :invitations => invitations})
 
