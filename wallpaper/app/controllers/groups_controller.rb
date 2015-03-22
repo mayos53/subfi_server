@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
   end
 
   def show
-  	@group = Group.includes([:wallpapers => :user,:memberships => :user,:recommendations]).find(params[:id])
+  	@group = Group.includes(:wallpapers => :user,:memberships => :user,:recommendations).find(params[:id])
     @group_result =  get_group_full_details(@group)
 
     render :json => {:group => @group_result , :status => RESPONSE_OK ,:message => "OK"}
