@@ -5,12 +5,6 @@ class ApplicationController < ActionController::Base
 
  #
 
- before_filter :set_charset
- def set_charset
-  @headers["Content-Type"] = "application/json; charset=utf-8"
- end
-
-
-
+ 
 
 end
