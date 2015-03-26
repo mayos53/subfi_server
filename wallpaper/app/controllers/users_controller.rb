@@ -33,7 +33,7 @@ class UsersController < ApplicationController
          @user.code = random_number
          @user.save
          
-         #send_confirmation_code
+         send_confirmation_code
          respond_to do |format|
             format.html { redirect_to @user}
             format.json { render :json => {:id => @user.id,:name => @user.name,:phone => @user.phone, :countryCode => @user.countryCode, :status => RESPONSE_OK ,:message => "OK"}}
