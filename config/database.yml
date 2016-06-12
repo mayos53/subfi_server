@@ -20,6 +20,16 @@ development:
   password: jer7765m
   socket: /tmp/mysql.sock
 
+production: 
+  database: Subfi
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  host: loopy.ctawmeuf8cxk.us-west-2.rds.amazonaws.com
+  username: mayos53
+  password: jer7765m
+  socket: /tmp/mysql.sock  
+
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
