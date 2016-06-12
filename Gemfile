@@ -55,6 +55,9 @@ end
 # paperclip
 gem "paperclip", "~> 4.1"
 
+gem 'responders', '~> 2.0'
+
+
 
 
 # source 'https://rubygems.org'
