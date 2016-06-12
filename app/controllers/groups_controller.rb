@@ -51,7 +51,7 @@ class GroupsController < ApplicationController
      
      logger.info "******params #{params[:id]}****"
       #
-      @groups_temp = Group.all(:include => {:memberships => :user}, :conditions => ['users.id=?', params[:id]])
+      @groups_temp = Group.find(:include => {:memberships => :user}, :conditions => ['users.id=?', params[:id]])
       @groups = Group.includes([{:wallpapers=> :user},{:memberships => :user},:recommendations,{:events => :user}]).where(:id => @groups_temp.map{|group| group.id})
 
       
