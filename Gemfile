@@ -54,6 +54,8 @@ end
 
 # paperclip
 gem "paperclip", "~> 4.1"
+gem 'aws-sdk', '~> 2.3'
+
 
 gem 'responders', '~> 2.0'
 
